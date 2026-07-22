@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRUE GOAT — 당신의 믿음은 취향인가, 선동인가</title>
+<meta name="description" content="메시와 호날두, 둘 다 축구계의 보물이며 둘 다 GOAT입니다. 진심을 먼저 투표하고, 축구가 등장하지 않는 9개의 가치관 문항(리커트 5점 척도)에 답하세요. 당신의 믿음이 소신인지 선동인지, 20년 넘는 커리어 팩트로 확인해드립니다.">
+
+<!-- ===== 구글 애드센스: 주석 해제 후 본인 게시자 코드 입력 =====
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous">
+</script>
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0D1015; --bg2:#141922; --card:#1A2029; --line:#2A323E;
+  --ink:#EDEDE8; --mut:#9AA0AA; --faint:#5D6570;
+  --messi:#4EA8DE; --messi-d:#1B6CA8; --messi-bg:#0F2231;
+  --cr7:#E14150; --cr7-d:#9C1F2C; --cr7-bg:#2A1418;
+  --gold:#E4B95B; --gold-d:#B78E33; --rad:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+.disp{font-family:'Anton',sans-serif;font-weight:400;line-height:.95;letter-spacing:.01em}
+::selection{background:var(--gold);color:#000}
+.screen{display:none}.screen.on{display:block}
+
+/* HERO */
+.hero{position:relative;min-height:96vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 20px;overflow:hidden}
+.hero .l,.hero .r{position:absolute;top:0;bottom:0;width:52%;z-index:0}
+.hero .l{left:0;background:linear-gradient(115deg,var(--messi-bg),transparent 75%);clip-path:polygon(0 0,100% 0,70% 100%,0 100%)}
+.hero .r{right:0;background:linear-gradient(245deg,var(--cr7-bg),transparent 75%);clip-path:polygon(30% 0,100% 0,100% 100%,0 100%)}
+.hero-in{position:relative;z-index:2;max-width:700px}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.names{display:flex;align-items:center;justify-content:center;gap:clamp(10px,4vw,32px)}
+.names .n{font-size:clamp(34px,10.5vw,84px);text-transform:uppercase}
+.names .messi{color:var(--messi)}.names .cr7{color:var(--cr7)}
+.names .amp{font-family:'JetBrains Mono',monospace;font-size:clamp(12px,3vw,18px);color:var(--gold);font-weight:700}
+.hero h1{font-size:clamp(20px,4.8vw,29px);font-weight:700;margin:28px auto 18px;max-width:620px;letter-spacing:-.02em;line-height:1.4}
+.hero h1 .hl{color:var(--gold)}
+.hero .lead{color:var(--mut);font-size:15.5px;max-width:580px;margin:0 auto;text-align:center;line-height:1.85}
+.hero .lead b{color:var(--ink)}
+.hero .lead .g{color:var(--gold);font-weight:600}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#0B0D10;border:none;font-weight:700;font-size:16px;padding:15px 32px;border-radius:100px;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 6px 24px rgba(228,185,91,.2);margin-top:32px;font-family:inherit}
+.cta:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(228,185,91,.32)}
+.hint2{margin-top:30px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--faint);text-transform:uppercase}
+
+/* HEART VOTE */
+.vote{display:flex;flex-direction:column;justify-content:flex-start;padding:104px 0 60px}
+.vote-h{text-align:center;margin-bottom:8px}
+.step-tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-d);padding:5px 14px;border-radius:100px;margin-bottom:20px}
+.vote-h h2{font-size:clamp(19px,4.6vw,25px);font-weight:700;letter-spacing:-.02em;line-height:1.35}
+.vote-h p{color:var(--mut);font-size:15px;max-width:540px;margin:14px auto 0}
+.vote-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:38px}
+.vbtn{position:relative;border-radius:16px;padding:44px 20px 38px;cursor:pointer;border:1px solid var(--line);background:var(--card);transition:transform .18s,border-color .18s,box-shadow .2s;text-align:center;font-family:inherit;overflow:hidden}
+.vbtn .vn{font-family:'Anton',sans-serif;font-size:clamp(30px,7vw,52px);text-transform:uppercase;line-height:1}
+.vbtn .vs{display:block;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.vbtn.vm{background:linear-gradient(160deg,var(--messi-bg),var(--card) 70%)}
+.vbtn.vm .vn{color:var(--messi)}
+.vbtn.vm:hover{border-color:var(--messi);transform:translateY(-3px);box-shadow:0 12px 34px rgba(78,168,222,.18)}
+.vbtn.vr{background:linear-gradient(200deg,var(--cr7-bg),var(--card) 70%)}
+.vbtn.vr .vn{color:var(--cr7)}
+.vbtn.vr:hover{border-color:var(--cr7);transform:translateY(-3px);box-shadow:0 12px 34px rgba(225,65,80,.18)}
+.vote-foot{text-align:center;margin-top:26px;color:var(--faint);font-size:13px}
+.dsel{width:100%;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:inherit;font-size:15px;cursor:pointer;appearance:none}
+.dsel:hover{border-color:var(--faint)}
+@media(max-width:520px){.vote-grid{grid-template-columns:1fr}}
+
+/* QUIZ */
+.pbar-wrap{position:sticky;top:0;z-index:20;background:rgba(13,16,21,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:14px 0}
+.pbar-in{max-width:820px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:14px}
+.pnum{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.15em;color:var(--faint);white-space:nowrap}
+.pnum b{color:var(--gold)}
+.ptrack{flex:1;height:5px;background:var(--line);border-radius:100px;overflow:hidden}
+.pfill{height:100%;width:0;background:var(--gold);border-radius:100px;transition:width .35s ease}
+.quiz-body{padding:44px 0 70px}
+.stmt-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+.stmt{margin-bottom:8px}
+.stmt .scen{display:block;font-size:clamp(18px,4.4vw,23px);font-weight:500;color:var(--ink);line-height:1.65;margin-bottom:18px}
+.stmt .judge{display:block;font-size:clamp(20px,5vw,27px);font-weight:700;letter-spacing:-.02em;line-height:1.5;color:var(--gold)}
+.stmt-sub{color:var(--faint);font-size:13.5px;margin-bottom:26px}
+.likert{display:flex;flex-direction:column;gap:10px}
+.lk{position:relative;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:15px 16px 15px 56px;cursor:pointer;transition:border-color .15s,background .15s;font-family:inherit;color:var(--ink);width:100%;font-size:15.5px;font-weight:500}
+.lk:hover{border-color:var(--faint);background:#1F2732}
+.lk .pk{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;border:2px solid var(--faint);font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--mut)}
+.lk .deg{float:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:.06em;margin-top:3px}
+.qblock{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+.qnum{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--gold);margin-bottom:10px;text-transform:uppercase}
+.qtext{font-size:clamp(17px,4.4vw,21px);font-weight:700;line-height:1.5;margin-bottom:14px}
+.pole{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+.pole .pm{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0;margin-top:2px}
+.pole .pd{font-size:14.5px;line-height:1.6}
+.pole .pd b{color:var(--gold);font-weight:700}
+.polegrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:560px){.polegrid{grid-template-columns:1fr}}
+.scalewrap{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0 6px}
+.sideL,.sideR{font-size:12.5px;font-weight:700;color:var(--ink);max-width:86px;line-height:1.35;text-align:center;flex-shrink:0}
+.dots{display:flex;align-items:center;gap:10px}
+.dcol{display:flex;flex-direction:column;align-items:center;gap:5px}
+.lc{border-radius:50%;border:2px solid var(--line);background:var(--bg);color:var(--mut);font-family:'JetBrains Mono',monospace;font-weight:700;cursor:pointer;transition:all .13s;display:flex;align-items:center;justify-content:center;padding:0}
+.lc.sz2{width:48px;height:48px;font-size:16px}
+.lc.sz1{width:40px;height:40px;font-size:14px}
+.lc.sz0{width:33px;height:33px;font-size:12.5px}
+.lc:hover{border-color:var(--gold);color:var(--ink)}
+.lc.sel{background:var(--gold);border-color:var(--gold);color:#0B0D10;box-shadow:0 0 14px rgba(228,185,91,.45)}
+.micro{font-size:10px;color:var(--faint);letter-spacing:.02em}
+.lcap{min-height:1.5em;font-size:13px;color:var(--gold);font-weight:600;text-align:center;margin-top:4px}
+.lcap.empty{color:var(--faint);font-weight:400}
+@media(max-width:560px){.sideL,.sideR{font-size:11px;max-width:64px}.dots{gap:6px}.lc.sz2{width:42px;height:42px}.lc.sz1{width:35px;height:35px}.lc.sz0{width:29px;height:29px}}
+.pgnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px}
+.back{background:none;border:none;color:var(--faint);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;cursor:pointer;text-transform:uppercase;padding:8px 0;margin-top:24px}
+.back:hover{color:var(--mut)}.back:disabled{opacity:.3;cursor:default}
+
+/* RESULT */
+.result-body{padding:56px 0 70px}
+.sec-h{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin:58px 0 20px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.r-head{text-align:center;margin-bottom:36px}
+.r-head h2{font-size:clamp(25px,6vw,38px);font-weight:700;letter-spacing:-.02em;line-height:1.3}
+.r-head h2 .hl{color:var(--gold)}
+.rel-badge{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;border-radius:100px;padding:7px 16px;margin-top:16px;border:1px solid}
+.rel-ok{color:#67C98A;border-color:#2C5A3C;background:#12241A}
+.rel-warn{color:var(--gold);border-color:var(--gold-d);background:#241E10}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.pcard .pl{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+.pcard .pv{font-family:'Anton',sans-serif;font-size:clamp(28px,6.5vw,42px);text-transform:uppercase;line-height:1.02}
+.pv.m{color:var(--messi)}.pv.r{color:var(--cr7)}.pv.g{color:var(--gold)}
+.pcard .ps{color:var(--mut);font-size:13.5px;margin-top:10px;line-height:1.6}
+.wbar{margin-top:14px}
+.wlab{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11.5px;margin-bottom:6px}
+.wlab .a{color:var(--messi);font-weight:700}.wlab .b{color:var(--cr7);font-weight:700}
+.wtrack{position:relative;height:9px;background:var(--line);border-radius:100px;overflow:hidden;display:flex}
+.wm{background:linear-gradient(90deg,var(--messi-d),var(--messi));height:100%}
+.wr{background:linear-gradient(270deg,var(--cr7-d),var(--cr7));height:100%}
+.wn{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint);margin-top:8px;line-height:1.6}
+.smeter{margin-top:16px}
+.smeter .slab2{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint);margin-bottom:5px}
+.strk{position:relative;height:10px;background:var(--line);border-radius:100px}
+.sneedle{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--gold);border-radius:2px;box-shadow:0 0 10px rgba(228,185,91,.8);transform:translateX(-50%)}
+.szones{position:absolute;inset:0;display:flex;border-radius:100px;overflow:hidden}
+.szones div{height:100%}
+.verdict-box{margin-top:16px;background:var(--bg2);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:0 var(--rad) var(--rad) 0;padding:22px 24px}
+.verdict-box .vt{font-size:17px;font-weight:700;margin-bottom:8px}
+.verdict-box .vt .ok{color:#67C98A}.verdict-box .vt .warn{color:var(--gold)}
+.verdict-box p{font-size:14.5px;color:var(--mut)}
+.verdict-box p b{color:var(--ink)}
+
+/* PROFILE */
+.prof{display:flex;flex-direction:column;gap:12px}
+.prow{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.prow .pt{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.prow .pn{font-size:14px;font-weight:600}
+.prow .pscore{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700}
+.pscore.m{color:var(--messi)}.pscore.r{color:var(--cr7)}.pscore.n{color:var(--faint)}
+.ptrk{position:relative;height:7px;background:var(--line);border-radius:100px}
+.pmid{position:absolute;left:50%;top:-2px;bottom:-2px;width:1px;background:var(--faint)}
+.pfl{position:absolute;top:0;bottom:0;border-radius:100px}
+.pfl.m{right:50%;background:linear-gradient(270deg,var(--messi-d),var(--messi))}
+.pfl.r{left:50%;background:linear-gradient(90deg,var(--cr7-d),var(--cr7))}
+
+/* AXIS CARDS (exposed) */
+.xp{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:20px}
+.xp-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.xp-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);border:1px solid var(--gold-d);border-radius:100px;padding:3px 12px;letter-spacing:.08em}
+.xp-lean{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;border-radius:100px;padding:4px 12px;margin-left:auto}
+.xp-lean.m{background:var(--messi-bg);color:var(--messi);border:1px solid var(--messi-d)}
+.xp-lean.r{background:var(--cr7-bg);color:var(--cr7);border:1px solid var(--cr7-d)}
+.xp-lean.n{background:var(--bg2);color:var(--faint);border:1px solid var(--line)}
+.xp-idt{font-size:14.5px;color:var(--mut);margin-bottom:14px;line-height:1.7}
+.xp-idt b{color:var(--ink)}
+.qitems{display:flex;flex-direction:column;gap:6px;margin:4px 0 6px}
+.qi{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mut);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;line-height:1.5}
+.qi .qtag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--faint);flex-shrink:0}
+.qi .ans{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;flex-shrink:0;padding:2px 9px;border-radius:100px;border:1px solid var(--line);color:var(--ink);white-space:nowrap}
+.slab{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:20px 0 8px}
+.slab.blue{color:var(--messi)}.slab.red2{color:var(--cr7)}
+.xp p{font-size:14.5px;line-height:1.8}
+.xp p.dim{color:var(--mut)}
+.crack{font-size:13.5px;color:var(--mut);border-left:2px solid var(--line);padding-left:12px;margin-top:8px;line-height:1.75}
+.crack b{color:var(--ink)}
+.datarows{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.drow{font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.65;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 13px}
+.drow b{color:var(--gold)}
+.drow .tm{color:var(--messi);font-weight:700}
+.drow .tr{color:var(--cr7);font-weight:700}
+
+.method{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-top:10px}
+.method h4{font-size:15px;font-weight:700;margin-bottom:10px}
+.method p{font-size:13.5px;color:var(--mut);line-height:1.75}
+.method p b{color:var(--ink)}
+
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:44px}
+.btn{flex:1;min-width:160px;text-align:center;padding:15px;border-radius:100px;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit;transition:transform .15s;border:none}
+.btn:hover{transform:translateY(-2px)}
+.btn-gold{background:var(--gold);color:#0B0D10}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.ad-slot{margin:46px auto;min-height:110px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);border-radius:var(--rad);color:var(--faint);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:20px}
+footer{border-top:1px solid var(--line);padding:32px 0 54px;text-align:center;color:var(--faint);font-size:13px}
+footer .disc{max-width:640px;margin:0 auto;line-height:1.7}
+
+/* ===== Google 웹사이트 번역기 위젯 — 기본 UI 전부 숨김 ===== */
+#google_translate_element{display:none}
+.goog-te-banner-frame,.goog-te-gadget,.skiptranslate>iframe{display:none!important}
+body{top:0!important;position:static!important}
+.goog-text-highlight{background:none!important;box-shadow:none!important}
+/* 언어 선택기 */
+.langsel{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 8px;font-family:inherit;font-size:12px;cursor:pointer;max-width:150px}
+.langsel:hover{border-color:var(--faint)}
+
+/* ===== 결과 화면 좌우 배치 무작위화(순서 편향 통제): body.flip이면 호날두가 왼쪽 ===== */
+body.flip .pfl.m{left:50%;right:auto;background:linear-gradient(90deg,var(--messi-d),var(--messi))}
+body.flip .pfl.r{right:50%;left:auto;background:linear-gradient(270deg,var(--cr7-d),var(--cr7))}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:12px;right:12px;z-index:60;display:flex;gap:4px" class="notranslate" translate="no">
+  <select class="langsel notranslate" id="langSel" translate="no" onchange="pickLang(this.value)">
+    <option value="auto">🌐 Auto (system)</option>
+    <option value="ko">한국어</option>
+    <option value="en">English</option>
+    <option value="ja">日本語</option>
+    <option value="zh-CN">中文(简体)</option>
+    <option value="zh-TW">中文(繁體)</option>
+    <option value="es">Español</option>
+    <option value="pt">Português</option>
+    <option value="fr">Français</option>
+    <option value="de">Deutsch</option>
+    <option value="it">Italiano</option>
+    <option value="ru">Русский</option>
+    <option value="tr">Türkçe</option>
+    <option value="ar">العربية</option>
+    <option value="hi">हिन्दी</option>
+    <option value="id">Indonesia</option>
+    <option value="vi">Tiếng Việt</option>
+    <option value="th">ไทย</option>
+  </select>
+</div>
+<div id="google_translate_element"></div>
+
+<!-- ============ SCREEN 1: HERO ============ -->
+<section class="screen hero on" id="sHero">
+  <div class="l"></div><div class="r"></div>
+  <div class="hero-in">
+    <div class="eyebrow" id="i_eyebrow">True GOAT · Psychometric Fact Check</div>
+    <div class="names">
+      <span class="n messi disp">Messi</span><span class="amp">&amp;</span><span class="n cr7 disp">Ronaldo</span>
+    </div>
+    <h1 id="i_heroH">그들은 축구계의 보물이며, <span class="hl">둘 다 GOAT입니다.</span></h1>
+    <div class="lead" id="i_heroLead">
+      <p>C.호날두의 플레이와 메시의 플레이 — 그 <b>아름다움에 대한 미적 취향</b>으로 누군가를 GOAT라 믿는 것은 완전히 정당합니다. 그것이 <span class="g">당신의 GOAT</span>일 것입니다.</p>
+      <p style="margin-top:12px">문제는, 적지 않은 사람들이 <b>감정을 팩트처럼 말하고 있다</b>는 것입니다. 두 선수의 커리어는 무려 <b>20년 넘게</b> 이어졌습니다 — 당신이 정확히 모르는 기록이 생각보다 많을 수밖에 없습니다.</p>
+      <p style="margin-top:12px">그래서 심리측정 설문 방법론(양극 제시형 문항·극 위치 교차·문항 무작위화)으로 만들었습니다. 수술, 게임, 이사, 쇼핑 — 축구와 무관한 일상의 판단들이 당신의 가치관을 측정하고, 당신의 믿음이 <span class="g">취향(소신)</span>인지 <span class="g">잘못된 선동에 오염된 것</span>인지 명확한 커리어 기록으로 확인해드립니다. 마지막에는 전체 참여자의 결과와 함께 <b>진정한 TRUE GOAT</b>가 공개됩니다.</p>
+    </div>
+    <button class="cta" onclick="startFlow()" id="i_cta">시작하기 <span>→</span></button>
+    <div class="hint2" id="i_hint">1 heart vote · 9 blind items · full fact reveal</div>
+  </div>
+</section>
+
+<!-- ============ SCREEN 1.5: DEMOGRAPHICS (선택) ============ -->
+<section class="screen" id="sDemo"><div class="wrap vote">
+  <div class="vote-h">
+    <span class="step-tag" id="i_demoStep">Step 2 / 3 · 표본 정보 (선택)</span>
+    <h2 id="i_demoH">두 가지만 여쭙습니다.</h2>
+    <p id="i_demoP">판정에는 쓰이지 않고, 참여자 분포 공개에만 쓰입니다. 건너뛰어도 됩니다.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px;max-width:440px;margin:34px auto 0;width:100%">
+    <select id="dAge" class="dsel">
+      <option value="">연령대 (선택 안 함)</option>
+      <option value="10s">10대</option>
+      <option value="20s">20대</option>
+      <option value="30s">30대</option>
+      <option value="40s">40대 이상</option>
+    </select>
+    <select id="dWatch" class="dsel">
+      <option value="">축구 시청 빈도 (선택 안 함)</option>
+      <option value="weekly">거의 매주 본다</option>
+      <option value="sometimes">가끔 본다</option>
+      <option value="rarely">거의 보지 않는다</option>
+    </select>
+    <button class="cta" style="margin-top:12px;justify-content:center" onclick="demoDone(false)" id="i_demoGo">계속하기 →</button>
+    <button class="back" style="margin:2px auto 0" onclick="demoDone(true)" id="i_skip">건너뛰기</button>
+    <button class="back" style="margin:2px auto 0" onclick="showVote()" id="i_backVote">← 이전 (진심 투표 수정)</button>
+  </div>
+</div></section>
+
+<!-- ============ SCREEN 2: HEART VOTE ============ -->
+<section class="screen" id="sVote"><div class="wrap vote">
+  <div class="vote-h">
+    <span class="step-tag" id="i_voteStep">Step 1 / 3 · 진심 투표</span>
+    <h2 id="i_voteH">지금 이 순간, 당신의 진심은<br>누구를 GOAT라 말합니까?</h2>
+    <p id="voteSub">계산 없이, 가슴이 먼저 고르게 하세요. 이 선택은 마지막에 다시 만납니다. (결과 보기 전까지 언제든 수정 가능)</p>
+  </div>
+  <div class="vote-grid">
+    <button class="vbtn vr" onclick="heartVote('r')"><span class="vn disp">Ronaldo</span><span class="vs">크리스티아누 호날두</span></button>
+    <button class="vbtn vm" onclick="heartVote('m')"><span class="vn disp">Messi</span><span class="vs">리오넬 메시</span></button>
+  </div>
+  <p class="vote-foot" id="i_voteFoot">어느 쪽을 골라도 존중받습니다 — 둘 다 GOAT니까요.</p>
+</div></section>
+
+<!-- ============ SCREEN 3: QUIZ ============ -->
+<section class="screen" id="sQuiz">
+  <div class="pbar-wrap"><div class="pbar-in">
+    <span class="pnum" id="i_pn">페이지 <b id="pnum">1</b> / 3</span>
+    <div class="ptrack"><div class="pfill" id="pfill"></div></div>
+  </div></div>
+  <div class="wrap quiz-body">
+    <div id="quizHead">
+    <span class="step-tag" id="i_quizStep">Step 3 / 3 · 취향 테스트 (축구 무관)</span>
+    <p style="color:var(--mut);font-size:14px;margin:14px 0 26px" id="i_quizP">두 선택지 중 당신의 마음이 어느 쪽에 얼마나 가까운지 A~E로 답해주세요. 정답은 없습니다.</p>
+    </div>
+    <div id="pageWrap"></div>
+    <div class="pgnav">
+      <button class="back" id="backBtn" onclick="prevPage()" disabled>← 이전 페이지</button>
+      <button class="cta" id="nextBtn" onclick="nextPage()" style="opacity:.4;pointer-events:none">다음 →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCREEN 4: RESULT ============ -->
+<section class="screen" id="sResult"><div class="wrap result-body">
+
+  <div class="r-head">
+    <span class="step-tag" id="i_finalTag">Final · 판정</span>
+    <h2 id="i_finalH">당신의 진심과, 당신의 가치관이<br><span class="hl">각각 고른 GOAT입니다.</span></h2>
+    <div id="relBadge"></div>
+  </div>
+
+  <div class="sec-h" style="margin-top:20px" id="i_sec1">① 진심 투표 — 감정이 고른 GOAT</div>
+  <div class="grid2">
+    <div class="pcard">
+      <div class="pl" id="i_pl1">당신의 진심 픽</div>
+      <div class="pv disp" id="myHeart">—</div>
+      <div class="ps" id="i_ps1">테스트 시작 전, 계산 없이 가슴으로 고른 선택.</div>
+    </div>
+    <div class="pcard">
+      <div class="pl" id="i_pl2">전체 참여자의 진심 픽</div>
+      <div class="pv disp" id="hWorldPick">—</div>
+      <div class="wbar">
+        <div class="wlab"><span class="a" id="hPctM">MESSI —%</span><span class="b" id="hPctR">—% RONALDO</span></div>
+        <div class="wtrack"><div class="wm" id="hBarM"></div><div class="wr" id="hBarR"></div></div>
+        <div class="wn" id="hN">집계 중</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-h" id="i_sec2">② 팩트 판정 — 8개 가치 문항이 가리킨 GOAT</div>
+  <div class="grid2">
+    <div class="pcard">
+      <div class="pl" id="i_pl3">점수 기반 판정 (총점 −16 ~ +16)</div>
+      <div class="pv disp" id="myFact">—</div>
+      <div class="smeter">
+        <div class="slab2"><span>◄ MESSI +16</span><span id="i_bal0">균형 0</span><span>−16 RONALDO ►</span></div>
+        <div class="strk">
+          <div class="szones"><div style="width:37.5%;background:var(--messi-bg)"></div><div style="width:25%;background:var(--bg2)"></div><div style="width:37.5%;background:var(--cr7-bg)"></div></div>
+          <div class="sneedle" id="sNeedle" style="left:50%"></div>
+        </div>
+      </div>
+      <div class="ps" id="myFactS"></div>
+    </div>
+    <div class="pcard">
+      <div class="pl" id="i_pl4">전체 참여자의 팩트 판정</div>
+      <div class="pv disp" id="fWorldPick">—</div>
+      <div class="wbar">
+        <div class="wlab"><span class="a" id="fPctM">MESSI —%</span><span class="b" id="fPctR">—% RONALDO</span></div>
+        <div class="wtrack"><div class="wm" id="fBarM"></div><div class="wr" id="fBarR"></div></div>
+        <div class="wn" id="fN">집계 중</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict-box" id="verdictBox"></div>
+
+  <div class="ad-slot"><!-- 애드센스 광고 유닛 ①: <ins class="adsbygoogle"> 코드를 이 안에 --> 광고 영역 · Ad Slot #1</div>
+
+  <div class="sec-h" id="i_sec3">③ 당신의 가치관 프로필 — 8개 축</div>
+  <p style="color:var(--mut);font-size:14px;margin:-8px 0 18px" id="i_profP">각 축은 1개의 양극 제시형 문항으로 측정되었습니다. 바가 왼쪽이면 그 축에서 당신의 가치관이 메시 진영 논리에, 오른쪽이면 호날두 진영 논리에 동의했다는 뜻입니다.</p>
+  <div class="prof" id="prof"></div>
+
+  <div class="sec-h" id="i_sec4">④ 8개 축의 정체 — 축별 팩트 전면 공개</div>
+  <p style="color:var(--mut);font-size:14px;margin:-8px 0 14px" id="i_axP">당신이 축구와 무관하다고 생각하며 답한 문항들은, 사실 20년 넘게 이어진 GOAT 논쟁의 8개 핵심 축이었습니다. 각 축마다 — 측정 문항과 당신의 응답, 양 진영이 싸우는 로우데이터, 그리고 양쪽 논리와 그 균열까지 숨김없이 공개합니다.</p>
+  <div style="margin:0 0 22px">
+    <!-- 데이터 이의 제기: 구글폼을 만들어 아래 href의 YOUR_FORM_ID를 교체하세요 -->
+    <a class="btn btn-ghost" style="display:inline-flex;flex:0 1 auto;min-width:0;padding:10px 18px;font-size:13px;text-decoration:none;color:var(--ink)" href="https://forms.gle/YOUR_FORM_ID" target="_blank" rel="noopener" id="i_dispute">⚑ 데이터 이의 제기 — 오류·누락 기록 제보</a>
+  </div>
+  <div id="xplain"></div>
+
+  <div class="ad-slot"><!-- 애드센스 광고 유닛 ②: <ins class="adsbygoogle"> 코드를 이 안에 --> 광고 영역 · Ad Slot #2</div>
+
+  <div class="sec-h" id="i_sec5">⑤ 설문 방법론</div>
+  <div class="method">
+    <h4 id="i_methodH">이 테스트는 다음 심리측정 원칙으로 설계되었습니다</h4>
+    <p id="i_methodP"><b>양극 제시형(bipolar) 문항</b> — 한쪽 주장에 동의/비동의를 묻지 않고, 똑같이 매력적인 두 인물·방식을 나란히 제시한 뒤 어느 쪽에 가까운지를 5단계로 답하게 합니다. 동의라는 응답 형식 자체가 없으므로 동의 편향이 원천 차단되고, 양쪽이 항상 함께 보이므로 한쪽만 묻는 프레이밍 편향도 제거됩니다. · <b>일상 비네트 은폐</b> — 모든 상황은 수술·게임·이사·쇼핑 등 축구와 무관한 일상으로 위장되어 측정 의도를 알 수 없습니다. · <b>1인칭 취향 문항 + 극 위치 교차</b> — 타인의 위대함을 심사하게 하지 않고 응답자 본인의 취향을 묻습니다(측정 의도 은폐 강화). 8개 가치 축을 각 1개 문항으로 측정하며, 메시 진영 극이 왼쪽인 문항과 호날두 진영 극이 왼쪽인 문항을 4:4로 교차 배치해 위치 편향을 통제합니다. 같은 원리로, 결과 화면의 좌우 배치(이름 순서·집계 바·게이지 방향)도 방문자별로 무작위 배정됩니다. · <b>문항 순서 무작위화</b> — 매 응답자마다 문항 순서가 섞입니다. · <b>주의 확인 문항</b> — 1개의 확인 문항과 동일 답변 반복(스트레이트라이닝) 점검으로 신뢰도 배지를 표시합니다. · <b>출처와 검증</b> — 모든 기록은 대회 공식 스탯과 주요 언론 보도(2026년 7월 기준)를 근거로 하며, 이의 제기가 반영되면 변경 이력을 공개합니다.</p>
+  </div>
+
+  <div class="sec-h" id="i_sec6">⑥ 한계 고지 — 이 테스트가 '완전한 객관'이 아닌 지점</div>
+  <div class="method">
+    <h4 id="i_limH">정직하게 밝힙니다. 다음은 이 테스트의 구조적 한계입니다.</h4>
+    <p id="i_limP"><b>1. 문항→진영 매핑은 제작자의 분석적 판단입니다.</b> 예컨대 "최종 결과가 전부다"를 메시 진영(트로피 세트 완성)으로 매핑했지만, "통산 골 최다도 결과"라며 반대로 매핑하는 관점도 가능합니다. 각 축 카드에 매핑의 근거와 양 진영 논리를 전부 공개한 이유입니다 — 매핑에 동의하지 않는다면 그 축의 판정은 당신 스스로 뒤집어 읽으면 됩니다. · <b>2. 통계적 검증(파일럿·신뢰도 계수·요인분석)은 아직 수행되지 않았습니다.</b> 위 방법론은 설계 원칙의 적용이며, 응답이 누적되면 축별 내적 일관성(크론바흐 α)을 산출해 공개할 예정입니다. · <b>3. 축 가중은 '동일 문항 수(각 1개)·동일 배점'으로 구조를 통일했으며, 축당 1문항 설계는 완주율을 위해 다중 문항의 오차 상쇄를 포기한 트레이드오프입니다.</b> 남는 것은 "8개 축을 동일하게 중요하다고 본다"는 선언된 기본값(무차별 원칙) 하나이며, 이것 역시 하나의 선택임을 밝힙니다. · <b>4. 로우데이터의 선별에는 편집이 개입합니다.</b> 이를 위해 아래 '데이터 이의 제기' 채널을 열어두었고, 제보가 반영되면 변경 이력을 공개합니다. · <b>5. 진심 투표를 먼저 하는 구조는 이후 응답에 영향(자기 정당화)을 줄 수 있습니다.</b> 1인칭 취향 문항과 비네트 은폐가 이를 완화하지만, 완전히 제거하지는 못합니다. · <b>6. 참여자 집계는 자기선택 표본입니다.</b> 세계 축구 팬 전체를 대표하지 않으므로, 선택 수집한 표본 정보(연령대·시청 빈도)를 함께 공개해 "누가 응답했는가"를 투명하게 보여주는 방식으로 보완합니다. · 마지막으로 — <b>진심 픽과 팩트 판정의 불일치는 '선동의 증명'이 아닙니다.</b> 그것은 당신의 선언된 가치관과 결론 사이의 불일치를 보여줄 뿐이며, 그 원인이 미적 취향인지 잘못된 정보인지는 아래 데이터를 읽고 당신이 판단할 몫입니다.</p>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-gold" onclick="restart()" id="i_restart">다시 테스트하기</button>
+    <button class="btn btn-ghost" id="shareBtn" onclick="shareResult()">결과 공유하기</button>
+  </div>
+
+  <footer>
+    <p class="disc" id="i_foot">이 사이트는 두 선수의 우열을 판정하지 않습니다. 메시와 호날두는 둘 다 축구계의 보물이며, 미적 취향에 따른 각자의 GOAT는 전부 정당합니다. 이 실험이 확인하는 것은 하나 — 당신의 믿음이 취향(소신)인지, 사실과 다른 근거 위에 세워진 것인지입니다. 수치는 2026년 7월 기준 공개 기록을 근거로 하며 일부는 근사치입니다. 결과가 확정 확인되지 않은 대회의 승패는 다루지 않습니다.</p>
+  </footer>
+</div></section>
+
+<script>
+/* =========================================================================
+   언어 결정
+   goat_lang 미설정('auto') → 시스템 언어(navigator.language)를 따름.
+   ko / en 은 직접 작성된 원문을 그대로 사용하고,
+   그 외 언어는 영어 원문을 Google 웹사이트 번역기로 자동 번역해 표시합니다.
+   ========================================================================= */
+function baseLang(x){return (x||'').toLowerCase().split(/[-_]/)[0];}
+function trCode(x){
+  const s=(x||'').toLowerCase();
+  if(s.startsWith('zh')) return (s.includes('tw')||s.includes('hk')||s.includes('hant'))?'zh-TW':'zh-CN';
+  return baseLang(s);
+}
+const LANG_PREF = localStorage.getItem('goat_lang') || 'auto';
+const SYS_LANG  = (LANG_PREF==='auto' ? (navigator.language||'en') : LANG_PREF);
+const LANG      = baseLang(SYS_LANG)==='ko' ? 'ko' : 'en';
+const TR_TARGET = (baseLang(SYS_LANG)==='ko'||baseLang(SYS_LANG)==='en') ? '' : trCode(SYS_LANG);
+function setLang(l){localStorage.setItem('goat_lang',l);location.reload();}
+function pickLang(v){
+  if(v==='auto') localStorage.removeItem('goat_lang'); else localStorage.setItem('goat_lang',v);
+  document.cookie='googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+  location.reload();
+}
+/* =========================================================================
+   [전체 참여자 집계 — 백엔드 연결 안내]
+   정적 HTML만으로는 진짜 '전 세계' 집계가 불가능합니다(서버 필요).
+   기본값은 이 브라우저 기준 데모 집계이며, 화면에 그 사실을 표기합니다.
+   실서비스 시 Stats.record()/fetchAll()을 본인 백엔드로 교체하세요.
+   예) Firebase RTDB:
+     record: (kind,side)=>fetch(`https://<프로젝트>.firebaseio.com/${kind}_${side}.json`,{method:'POST',body:'1'})
+     fetchAll: () => 집계 JSON을 {hm,hr,fm,fr,fb} 형태로 반환
+   신뢰도 검사를 통과한 응답만 record 하여 데이터 품질을 유지합니다.
+   ========================================================================= */
+const Stats = {
+  record(kind, side){
+    const k='goat_'+kind+'_'+side;
+    localStorage.setItem(k,(parseInt(localStorage.getItem(k)||'0',10)+1));
+  },
+  fetchAll(){
+    const g=k=>parseInt(localStorage.getItem('goat_'+k)||'0',10);
+    return Promise.resolve({hm:g('heart_m'),hr:g('heart_r'),fm:g('fact_m'),fr:g('fact_r'),fb:g('fact_b'),demo:true});
+  }
+};
+
+/* =========================================================================
+   8개 리커트 문항 (+주의 확인 1) — 8개 축 × 각 1문항, 극 위치 4:4 교차
+   key: 'm' = 동의할수록 메시 진영 / 'r' = 동의할수록 호날두 진영
+   ========================================================================= */
+const ITEMS = [
+  {id:"V1",ax:0,k1:"m",l1:"권위의 상",l2:"치열한 경쟁의 상",
+   q:"당신의 아이가 상을 받아왔습니다. 더 기쁠 상은 어느 쪽입니까?",
+   d1:"온 나라가 다 아는, 이름만으로 설명이 끝나는 최고 권위의 상",
+   d2:"최고 실력자들만 모여 경쟁해, 따내기가 가장 어렵기로 유명한 상"},
+  {id:"V2",ax:1,k1:"r",l1:"결정적 한 방",l2:"높은 평균",
+   q:"큰 수술을 앞두고, 집도의를 직접 고를 수 있습니다. 어느 쪽을 고르겠습니까?",
+   d1:"생사가 걸린 큰 수술일수록, 유독 더 강해진다는 평판의 의사",
+   d2:"평균적으로는 매우 잘하지만, 유독 큰 수술에서는 평균보다 못한다는 평판의 의사"},
+  {id:"V3",ax:2,k1:"m",l1:"주변까지 키운 사람",l2:"한 가지의 최고",
+   q:"훗날 사람들이 당신을 기억한다면, 더 끌리는 쪽은 어느 것입니까?",
+   d1:"“그 사람은 자기 일도 최고였는데, 주변까지 다 키워냈지”",
+   d2:"“다른 건 몰라도, 그 한 가지만큼은 역사상 최고였지”"},
+  {id:"V4",ax:3,k1:"r",l1:"하나를 정복",l2:"전부 수집",
+   q:"새 게임을 시작했습니다. 당신의 플레이 스타일은 어느 쪽에 가깝습니까?",
+   d1:"가장 어려운 도전 하나를 골라, 완벽해질 때까지 반복 정복한다",
+   d2:"존재하는 모든 업적과 엔딩을 하나도 빠짐없이 수집한다"},
+  {id:"V5",ax:4,k1:"m",l1:"불꽃같은 정점",l2:"오래가는 정상",
+   q:"인생 그래프를 미리 고를 수 있다면, 어느 쪽을 고르겠습니까?",
+   d1:"짧은 시기, 아무도 도달 못 한 최고점에 오르는 삶 — 이후에도 훌륭하지만, 그 높이는 다시 없다",
+   d2:"그 최고점에는 못 미쳐도, 은퇴하는 날까지 정상권을 지키는 삶 — 평생 쌓아 올린 총량은 결국 누구보다 많다"},
+  {id:"V6",ax:5,k1:"r",l1:"가는 곳마다 인정",l2:"한곳의 전설",
+   q:"더 끌리는 인생은 어느 쪽입니까?",
+   d1:"여러 도시와 직장을 옮겨 다니며, 가는 곳마다 정상에 서는 삶",
+   d2:"한곳에 뿌리내려, 그 동네·그 직장의 전설이 되는 삶"},
+  {id:"V7",ax:6,k1:"m",l1:"결과로만",l2:"출발선까지",
+   q:"당신의 인생이 평가받는다면, 원하는 방식은 어느 쪽입니까?",
+   d1:"시작이 어땠든, 내가 이룬 최종 결과의 크기로만 평가받고 싶다",
+   d2:"내가 어떤 조건에서 출발했는지까지 함께 평가받고 싶다"},
+  {id:"V8",ax:7,k1:"r",l1:"수치 데이터",l2:"전문가의 평",
+   q:"몇 달을 고민한 큰 구매(차·가전 등)의 마지막 결정 순간, 당신이 믿는 것은 어느 쪽입니까?",
+   d1:"고장률·측정 성능 같은 수치 데이터",
+   d2:"그 분야를 오래 본 전문가와 장기 사용자들의 평"}
+];
+const IMC = {id:"IMC",q:"응답 확인을 위한 문항입니다. 아래에서 D를 선택해주세요.",l1:"",l2:"",d1:"",d2:""};
+function optLabels(it){
+  if(it.id==='IMC') return LANG==='en'?['Option A','Option B','Option C','Option D','Option E']:['선택지 A','선택지 B','선택지 C','선택지 D','선택지 E'];
+  if(LANG==='en') return ["Definitely '"+it.l1+"'","Slightly '"+it.l1+"'","Exactly in the middle","Slightly '"+it.l2+"'","Definitely '"+it.l2+"'"];
+  return ["확실히 '"+it.l1+"'","조금 더 '"+it.l1+"'",'정확히 중간',"조금 더 '"+it.l2+"'","확실히 '"+it.l2+"'"];
+}
+
+/* ========== 8개 축 메타 + 팩트 카드 (양 진영 논리·균열 전면 노출) ========== */
+const AXMETA = [
+{ name:"위상 vs 난이도",
+  idt:"이 축의 정체 — <b>월드컵의 권위를 위에 둘 것인가, 챔피언스리그의 수준을 위에 둘 것인가.</b> 어느 무대의 왕이 GOAT인가라는 무대 선택의 축입니다.",
+  data:[
+    `<span class="tm">메시</span> 월드컵 통산 <b>21골 12도움 = 공격포인트 33, 역대 1위</b> · 2022 토너먼트 전 경기 골 + 전 경기 POTM(92년 역사 유일)`,
+    `2022 대진: <b>8강 전까지 톱10 상대 없음</b> · 녹아웃 5골 중 PK 3(네덜란드·크로아티아·프랑스)`,
+    `<span class="tr">호날두</span> 챔스 <b>140골 역대 1위 · 우승 5회 · 결승 4골</b> — 반면 월드컵 녹아웃은 2022년까지 5개 대회 무득점(첫 골은 2026년) · 2022 16강·8강은 선발 제외(벤치)`,
+    `구조 차이: 챔스 8강 이후엔 약체가 존재하지 않음 / 월드컵은 조별~16강 전력차가 크고, 국적(동료 복권)이 성패의 절반`,
+    `국대 난이도 지표 ①(상대 랭킹): FIFA 톱10의 다수는 통상 유럽 국가 — 유로·네이션스리그의 상대 랭킹 평균은 코파를 상회 · <span class="tm">메시</span>의 2022 대진은 8강 전 4개 상대(사우디 51위 포함) 평균 랭킹이 30위권`,
+    `국대 난이도 지표 ②(사전 배당률): 유로 2016의 포르투갈은 우승후보권 밖 아웃사이더 / 2021 코파·2022 월드컵의 아르헨티나는 시장이 꼽은 최상위 우승후보`,
+    `<span class="tr">호날두</span> 유로 2016 우승 경로(대칭 검증): 조별 3무·조 3위로 토너먼트 진출 · 90분 내 승리는 4강 웨일스전 1경기 · 16강 연장승·8강 승부차기·결승 연장승(본인은 25분 부상 아웃)`
+  ],
+  mLogic:"위상을 고른 당신에게 월드컵은 커리어에 기회가 서너 번뿐이고, 돈으로 선수를 살 수 없으며, 전 인류가 지켜보는 유일한 무대입니다. 그 무대의 통산 공격포인트 1위와 전 경기 골·전 경기 POTM이라는 92년 역사 유일의 기록, 그리고 상대 진영의 녹아웃 무득점이라는 공백이 이 축의 판정 근거입니다.",
+  mCrack:"균열 — 권위와 측정 정밀도는 다른 문제입니다. 2022의 대진 구성과 PK 성분(3/5)은 데이터로 남아 있고, 국적 복권이 성패의 절반인 무대는 개인 실력의 측정 도구로는 오염이 큽니다.",
+  rLogic:"난이도를 고른 당신에게 실력의 자는 상대의 수준입니다. 후반 라운드에 약체가 구조적으로 없고 최정상 클럽들이 매년 붙는 무대의 20년 넘는 성적표 — 140골 대 129골, 결승골 4 대 2, 우승 5회 — 가 이 축의 판정 근거입니다. 국가대표로 시야를 넓혀도 같은 방향입니다 — 상대의 FIFA 랭킹 평균과 사전 배당률이라는 난이도 지표에서, 아웃사이더 포르투갈의 우승은 우승후보 아르헨티나의 우승보다 가파른 등반이었습니다.",
+  rCrack:"균열 — '난이도'의 정의부터 이 진영에 불리하게 반전됩니다. 챔스는 이적시장이 있는 무대 — 갈락티코 자본으로 세계 최고 동료를 사 모을 수 있는 조건에서의 등반이고, 월드컵은 주어진 국적만으로 싸우는 무대입니다. 그리고 '더 어려웠다'는 국대 우승의 경로를 열면: 유로 2016은 조별 3무 뒤 정규시간 승리 단 1경기(웨일스전)로 통과한 우승이었고, 나머지 메이저 2개는 2019년 신설된 네이션스리그입니다. 난이도 지표(배당률)는 아웃사이더의 우승을 빛내는 동시에, 그 팀이 대회를 지배하지 못했다는 지표이기도 합니다."
+},
+{ name:"클러치·빅게임 vs 꾸준함",
+  idt:"이 축의 정체 — <b>실력을 결정적 순간과 빅게임(강팀전)에서 잴 것인가, 커리어 전체 표본에서 잴 것인가.</b> GOAT 논쟁의 제1축입니다.",
+  data:[
+    `<span class="tm">메시</span> 커리어 전체 메이저 대회(2026 월드컵 포함), FIFA 톱10 상대 <b>오픈플레이 골: 2022 결승 프랑스전 연장골이 사실상 유일</b> — 2026년 8골도 전부 톱10 밖 상대, 스위스·잉글랜드·스페인전 무득점(도움 관여는 존재)`,
+    `<span class="tm">메시</span> 2021 코파 4골 = 볼리비아 2 + 칠레·에콰도르 프리킥 / 결승 브라질전 무득점`,
+    `<span class="tm">메시</span> 월드컵 PK 성분: 통산 8회 시도 4골 — 2026년 한 대회 2실축은 월드컵 역사상 최초`,
+    `<span class="tr">호날두</span> 2016-17 챔스 8강~결승 <b>10골 + 3라운드 연속 MOM(대회 역사상 유일)</b> · 17-18 11경기 연속골`,
+    `<span class="tm">메시</span>의 큰 무대 실존 기록: 2010 8강 아스날전 4골 · 2012 레버쿠젠전 5골 · 2009/2011 챔스 결승 맨유전 연속 득점(11 MOM) · 챔스 경기당 득점 0.81 vs 0.76 우위 · 월드컵 녹아웃 도움 10개 — 역대 1위(2위 펠레·그리즈만 4개)`,
+    `<span class="tr">호날두</span>의 국대 큰 무대 성분(대칭 검증): 유로 2016 3골 3도움 = 조별 헝가리전 2골 1도움 + 16강 크로아티아전 결승골 도움 + 4강 웨일스전 1골 1도움(결승은 부상 아웃) · NL 2019 4강 스위스전 해트트릭`,
+    `<span class="tr">호날두</span>의 클러치 극점 성분(대칭 검증): 2008 결승 헤더 선제골 뒤 승부차기 본인 실축(팀이 6-5로 우승) · 2012 4강 승부차기 첫 키커 실축(팀 탈락) · 2014 결승골 = 3-1로 기운 연장 120분 PK`
+  ],
+  mLogic:"꾸준함을 고른 당신에게 긴 표본은 운·심판·컨디션이라는 노이즈가 빠진 실력의 참값입니다. 그리고 그 참값은 무대를 가리지 않고 같은 방향입니다 — 클럽 경기당 골 0.83 대 0.76, 챔스 0.81 대 0.76, 경기당 공격포인트 1.15 대 0.93, 라리가 통산 골·도움 동시 1위, 월드컵 통산 공격포인트 33 역대 1위. 아스날전 4골·레버쿠젠전 5골·챔스 결승 2개 대회 연속 득점이라는 실존 기록이 큰 무대 제로라는 프레임을 반증합니다. 강팀만 남는 좁은 표본에서만 반대편 논리가 강해지는데, 그 좁은 표본이 전체 표본의 참값보다 우선해야 할 통계적 근거는 없습니다.",
+  mCrack:"균열 — 강팀만 남는 무대로 좁히면, 메시의 빅게임 결정력이 호날두에 못 미쳤다는 것이 기록입니다. 커리어 전체 메이저 대회(2026 월드컵 포함)에서 FIFA 톱10 상대 오픈플레이 골은 2022 결승 프랑스전 연장골이 사실상 유일 — 2026년에도 8골 전부 톱10 밖 상대였고 스위스·잉글랜드·스페인전은 무득점(도움 관여는 존재)이었습니다. 같은 기준으로 호날두는 약 5~6개(유로 2012 네덜란드전 2골, 2018 스페인전, NL 2025 독일·스페인전 등, 당시 랭킹 기준)에 챔스 16-17 녹아웃 10골+3연속 MOM까지 — 빅게임 총량의 격차는 방향이 분명합니다.",
+  rLogic:"클러치를 고른 당신의 논리는 조던이 평균 스탯이 아니라 파이널로 GOAT가 된 것과 같습니다. 16-17 녹아웃 10골에 3라운드 연속 MOM, 11경기 연속골이 그 무대의 측정값이며, 반대편의 톱10 상대 오픈플레이 골은 결승 연장골 하나에 녹아웃 PK 비중이 5분의 3이었습니다. 그리고 이것은 챔스만의 이야기가 아닙니다 — 유로 2012 네덜란드전 2골, 2018 월드컵 스페인전 해트트릭, NL 2019 스위스전 해트트릭, NL 2025 독일·스페인전 득점까지, 강팀전 총량은 무대를 가리지 않고 같은 방향입니다(톱10 상대 오픈플레이 골 약 5~6 대 사실상 1). 마지막으로 클러치의 무게는 팀의 처지가 정합니다 — 시장이 우승후보로 꼽은 팀의 에이스로서가 아니라, 후보권 밖 팀의 에이스로서 결정적 순간을 이겨온 쪽의 클러치가 더 무겁습니다.",
+  rCrack:"균열 — 잣대를 가장 무거운 무대로 조이면 균열이 반대로 꽂힙니다. 호날두의 월드컵 녹아웃 득점은 2022년까지 5개 대회 통틀어 0(첫 골은 2026년)이고, 유로·월드컵 결승 득점도 통산 0입니다(유로 2004 결승 무득점, 2016 결승 부상 아웃). '클러치의 왕'이 정작 축구에서 가장 무거운 두 무대 — 월드컵 녹아웃과 메이저 결승 — 에서 20년간 침묵했다는 것이 같은 잣대의 측정값입니다. 챔스 클러치가 순수 능력이라면, 그 능력이 국가대표 유니폼에서만 증발한 이유를 클러치 이론은 설명하지 못합니다."
+},
+{ name:"하나 vs 여러 개",
+  idt:"이 축의 정체 — <b>본업(골) 하나의 극한인가, 골+창조 두 직무의 겸비인가.</b> 두 선수의 유형 차이 그 자체입니다.",
+  data:[
+    `<span class="tr">호날두</span> 공식전 통산 <b>900골 이상 — 역대 1위</b> · A매치 최다 득점·최다 출전 · PL·라리가·세리에A·챔스·유로 <b>5개 무대 득점왕(역대 유일)</b>`,
+    `<span class="tm">메시</span> 통산 도움 <b>350개+ vs 250개+</b> · 라리가 최다 골(474)과 최다 도움 동시 보유 · 2012 역년 91골(기네스)`,
+    `단, 챔스 통산 어시스트 <b>역대 1위는 지금도 호날두(UEFA 공식 42개 — 2위 디마리아 41, 메시 40)</b> — 무대를 챔스로 좁히면 창조 격차는 역전 (2002년 이전 기록을 복원한 Opta 재집계로는 긱스 41·호날두 40·메시 39)`,
+    `역방향 검증: <span class="tm">메시</span>가 떠난 바르사는 챔스 조별 탈락 2연속 + 바이에른 상대 0승 4패 무득점으로 붕괴`,
+    `<span class="tr">호날두</span> 900골+의 성분(대칭 검증): PK 통산 184골 — 역대 최다, 통산 골의 약 19%(<span class="tm">메시</span> 약 115골·약 12%) · 2023년 이후의 129골은 사우디 클럽 소속(리그 102골)`
+  ],
+  mLogic:"겸비를 고른 당신에게 골과 창조는 공격의 서로 다른 두 직무이고, 한 명이 둘 다 역대 최상위인 것은 난이도가 다른 성취입니다. 한 리그의 역대 1위 스트라이커이자 역대 1위 플레이메이커라는 동시 보유는 전례가 없으며, 메시가 떠난 순간 바르사의 창조 환경 자체가 붕괴한 것이 그 실측치입니다.",
+  mCrack:"균열 — 무대를 챔스로 좁히면 어시스트 격차는 사라지는 정도가 아니라 역전됩니다 — 챔스 통산 어시스트 역대 1위는 지금도 호날두(UEFA 공식 42개, 메시 40개)입니다. 리그의 격차가 최고 무대에서 재현되지 않았다면 환경 값이 섞인 스탯이라는 반론이 성립합니다.",
+  rLogic:"하나의 극한을 고른 당신에게 축구의 승패를 정하는 유일한 화폐는 골입니다. 통산 900골 이상, A매치 최다골, 그리고 성격이 전혀 다른 5개 무대 전부에서 득점왕이 된 기록은 축구사에 대체 사례가 없습니다.",
+  rCrack:"균열 — 환경 보정의 칼은 양날입니다. 호날두 골의 공급선에는 외질·베일·크로스·모드리치라는 역대급 크리에이터진과 역대 최다 PK(통산 184골)가 있었습니다. 그리고 '총량 1위'는 '경기 수 1위'이기도 합니다 — 경기당 득점률은 커리어 내내 메시가 위였고(챔스 0.81 대 0.76), 총량에서 PK 성분을 검사하는 순간 '본업 하나의 극한'이라는 서사는 '가장 오래, 가장 많이 찬 선수'로 재서술될 여지가 생깁니다."
+},
+{ name:"완성 vs 높이",
+  idt:"이 축의 정체 — <b>존재하는 모든 트로피의 그랜드슬램인가, 최고봉(챔스)의 반복 등정인가.</b> 트로피를 세는 방법의 축입니다.",
+  data:[
+    `<span class="tm">메시</span> 세트: 월드컵1·코파2·챔스4·라리가10·발롱8·골든볼2 — <b>축구가 주는 상 전 종류 보유</b>`,
+    `단, 챔스 4회 중 <b>2006년은 16강 부상 이후 전 경기 결장(결승 명단 제외)</b> — 실질 3회 논쟁`,
+    `<span class="tr">호날두</span> 챔스 5회, 전부 주역 지분(08 득점왕·결승골 / 14 결승골 / 16 승부차기 마지막 키커 / 17 결승 2골 / 18 대회 15골 득점왕) · 챔스 득점왕 7회`,
+    `<span class="tr">호날두</span> 유로1+네이션스리그2 — 반면 <b>월드컵은 무관</b>`,
+    `단, 국대 트로피 3개 중 2개는 <b>네이션스리그</b> — 2019년 첫 파이널이 열린 신설 대회로, 유로·월드컵 대비 체급 논쟁이 붙는 트로피`
+  ],
+  mLogic:"완성을 고른 당신의 논리는 그랜드슬램입니다. 2006을 빼도 남은 챔스 3회는 결승골 2개와 트레블 캐리로 지분이 명확하며, 상대의 월드컵 공백은 성분이 아니라 존재의 문제 — 어떤 보정으로도 0은 메워지지 않습니다.",
+  mCrack:"균열 — 개수가 아니라 난이도 가중으로 세면, 최고봉 5회 등정과 득점왕 7회의 무게, 그리고 무관국 출신이라는 출발 고도차가 계산에 들어와 저울이 움직입니다.",
+  rLogic:"높이를 고른 당신의 논리는 등산입니다. 여덟 봉우리를 한 번씩 오른 것과 에베레스트를 다섯 번 오른 것 중 산악인은 후자를 위대하다 답합니다. 핵심은 '다섯 번'이라는 반복입니다 — 한 번의 우승에는 운이 섞일 수 있지만, 두 클럽에 걸쳐 다섯 번, 그중 16·17·18은 챔스 체제 이후 유일한 3연패(세 시즌 모두 득점왕)로 반복된 등정은 우연이라는 가설을 기각합니다. 그리고 그 5회 전부에 주역 지분이 붙어 있다는 것이 위 명세입니다.",
+  rCrack:"균열 — 월드컵 공백은 '몇 회'가 아니라 0의 문제라 어떤 고도 가중으로도 '전부 해본 자'의 자격은 생기지 않습니다. 그리고 '가장 높은 산이 챔스'라는 전제 자체가 이 진영의 가정입니다 — 축구사가 실제로 서열을 매겨온 최고봉은 월드컵이었습니다(펠레·마라도나의 지위가 그 증거). 등반 기록에도 각주가 붙습니다: 최강팀을 벗어난 유일한 시기(유벤투스 3년)의 챔스는 8강·16강·16강 탈락으로 끝났습니다 — 최상위 베이스캠프 밖에서의 등정은 없었습니다."
+},
+{ name:"정점·효율 vs 지속·총량",
+  idt:"이 축의 정체 — <b>짧고 압도적인 절대 정점(2009~12)과 커리어 내내의 효율(비율)인가, 20년 넘는 유지가 쌓아 올린 누적 총량인가.</b> 위대함의 모양에 대한 축입니다.",
+  data:[
+    `<span class="tm">메시</span> 11-12 시즌 <b>73골 29도움</b> · 2012 역년 91골(기네스) — 이후 아무도 근접 못 한 통계적 최고점`,
+    `그 정점의 동반자: <b>사비·이니에스타·부스케츠</b>(유로08·WC10·유로12 메이저 3연속 제패 중원)+펩 — 단, 같은 공급을 받은 비야·페드로는 시즌 20골 안팎`,
+    `<span class="tr">호날두</span> 23세 맨유(챔스+PL+발롱, 42골) · 31~33세 챔스 3연패+<b>3시즌 연속 챔스 득점왕</b>`,
+    `<span class="tr">호날두</span> 레알 통산 <b>438경기 450골 — 경기 수보다 골이 많은 유일한 선수</b>`,
+    `<span class="tr">호날두</span> 지속의 성분(대칭 검증): 레알 450골 중 PK 79골(약 18%) · 2023년 이후의 '유지'는 사우디 리그에서 측정(리그 102골) — 유럽 5대 리그 표본 아님`,
+    `정점 높이 직접 비교: 역년 최고 — <span class="tm">메시</span> 2012년 91골 vs <span class="tr">호날두</span> 2013년 69골 · 시즌 최고 — 73골(11-12) vs 61골(14-15)`,
+    `정점·효율 측 근거(커리어 전체 비율): 경기당 골 — 클럽 <span class="tm">메시 0.83</span> vs <span class="tr">호날두 0.76</span> · 경기당 공격포인트 <span class="tm">1.15</span> vs <span class="tr">0.93</span>`,
+    `<span class="tr">호날두</span> 지속의 총합 = 누적 기록 세트: 공식전 최다 골(976)·A매치 최다(146)·챔스 최다(140)·유로 최다(14) · 월드컵 <b>6개 대회 연속 득점(2006~2026, 역대 유일)</b> — <span class="tm">메시</span>는 2010 무득점으로 5개 대회`
+  ],
+  mLogic:"정점을 고른 당신에게 위대함은 도달한 고도입니다. 73골 29도움과 역년 91골은 축구가 통계적으로 도달해본 적 없는 높이이며, 같은 중원의 공급을 받은 비야·페드로가 20골 안팎일 때 메시는 73골이었다는 대조군이 개인 지분의 크기를 증명합니다. 그리고 정점의 논리는 효율의 논리이기도 합니다 — 총량은 경기 수가 함께 쌓지만 비율은 실력만이 만듭니다. 경기당 골(클럽 0.83 대 0.76)과 경기당 공격포인트(1.15 대 0.93)에서 커리어 내내 앞선 쪽은 메시였고, 같은 90분에서 더 많은 것을 만든 선수가 더 높은 곳에 있던 선수입니다.",
+  mCrack:"균열 — 그 정점은 메이저 3연패 중원과 펩이라는 역대급 환경, 한 시기에 묶여 있습니다. 합작의 지분 논쟁은 완전히 해소되지 않습니다.",
+  rLogic:"지속을 고른 당신에게 짧은 폭발은 재능과 운의 합이지만 20년 넘는 유지는 운이 빠진 순수 실력입니다. 23세의 맨유와 31~33세의 레알 — 두 나이대에서 정점을 두 번 찍었고, 레알에서는 경기 수보다 골이 많다는 전무후무한 기록을 남겼습니다. 그리고 그 유지의 총합이 누적 기록 전부를 가져갔습니다 — 공식전 통산 최다 골(976)·A매치 최다(146)·챔스 최다(140)·유로 최다(14), 그리고 월드컵 6개 대회 연속 득점(2006~2026, 역대 유일 — 메시는 2010 무득점으로 5개 대회).",
+  rCrack:"균열 — 두 번째 정점(31~33세)은 역대 최고 자본의 팀에서였고, 처음으로 최강이 아닌 팀에 선 순간(유베·맨유 2기) 챔스는 16강~8강, 마지막은 무관과 중도 계약 해지였습니다. 최상위 환경에서만 재현된 지속이라면, 그것은 이 진영이 메시의 정점에 걸었던 '환경빨' 잣대를 정확히 되돌려받는 지점입니다. 그리고 높이는 여전히 비교 불가입니다 — 73골 29도움과 역년 91골에 호날두의 어떤 시즌도 근접한 적이 없습니다(최고 시즌 61골, 역년 최고 69골)."
+},
+{ name:"깊이 vs 범용",
+  idt:"이 축의 정체 — <b>한 클럽의 모든 역사를 새로 쓴 전설인가, 리그를 바꿔가며 정상을 재현한 정복자인가.</b> 환경과 실력을 분리하는 축입니다.",
+  data:[
+    `<span class="tm">메시</span> 바르사 통산 672골·최다 도움·트로피 35개 — <b>전 부문 클럽 역대 1위</b> · 재정 붕괴기(20-21)에도 리그 30골 득점왕+코파델레이 우승`,
+    `<span class="tr">호날두</span> PL·라리가·세리에A <b>3개 리그 전부 리그 우승+득점왕</b> · 이적 첫 시즌마다 정상(레알 33골 · 34세 유베 21골+MVP)`,
+    `노년 표본은 양쪽 감점: <span class="tm">메시</span> PSG 챔스 16강 2연속 탈락(레알전 PK 실축) / <span class="tr">호날두</span> 맨유 2기 팀 6위·무관·계약 해지`,
+    `제3의 데이터: <b>메시·음바페가 모두 떠난 PSG는 챔스 2연패(24-25 결승 5-0, 25-26)</b>`,
+    `이적지의 체급(대칭 검증): 레알·유베 모두 당시 각 리그 최상위 클럽(유베는 입단 시점 세리에A 7연패 중) · <span class="tr">호날두</span>의 유베 3시즌 챔스 성적: 8강(아약스)·16강(리옹)·16강(포르투) 탈락`
+  ],
+  mLogic:"깊이를 고른 당신에게 한 조직을 20년 넘게 정상에 묶어둔 것은 매년 새로운 도전자와 전술 트렌드를 전부 이겨냈다는 뜻입니다. 클럽의 모든 역대 기록을 다시 썼고, 팀 재정이 붕괴한 해에도 혼자 득점왕과 컵 우승으로 팀을 끌었다는 것이 좋은 팀 덕이라는 프레임의 반례입니다.",
+  mCrack:"균열 — 환경을 바꾼 유일한 표본(PSG)에서 최고 무대 재현에 실패했다는 실측치가 반대편에 있습니다. 노년 표본이라는 방어는 맨유 2기와 상쇄되어 무승부까지만 갑니다.",
+  rLogic:"범용을 고른 당신의 논리는 재현성입니다. 수비 문화와 전술 생태계가 전혀 다른 3개 리그에서 전부 우승과 득점왕을 재현했고, 매번 이적 첫 시즌부터였습니다. 환경이 바뀌어도 결과가 재현될 때 환경 덕이라는 가설이 비로소 기각됩니다.",
+  rCrack:"균열 — '어디서든'의 표본을 정확히 읽으면, 리그는 세 번 바뀌었지만 팀의 체급은 한 번도 바뀌지 않았습니다(맨유·레알·유베 = 각 리그 최상위 자본). 체급이 처음으로 떨어진 유일한 표본(맨유 2기)에서 결과는 리그 6위·무관·계약 해지 — '환경을 넘는 재현'의 실측 범위는 '최상위 환경 사이의 이동'까지입니다. 반면 깊이 쪽에는 재정 붕괴라는 진짜 역경 표본이 있습니다(20-21 리그 득점왕+컵 우승)."
+},
+{ name:"결과 vs 맥락",
+  idt:"이 축의 정체 — <b>최종 트로피 장부만 볼 것인가, 출발선(무관국 vs 강호)까지 보정할 것인가.</b> 평가의 방법론 축입니다.",
+  data:[
+    `결과 장부: <span class="tm">메시</span> WC1·코파2·챔스4·리그12·발롱8 / <span class="tr">호날두</span> 유로1·NL2·챔스5·리그7·발롱5`,
+    `포르투갈, <span class="tr">호날두</span> 이전: 메이저 우승 <b>0회</b> → 재임기에 유로2016+네이션스리그 2회 — <b>우승 3개 전부 한 선수의 시대에만 존재</b>`,
+    `아르헨티나, <span class="tm">메시</span> 이전: 월드컵 2회+코파 14회 강호 · 동료 = 이과인·아궤로·디마리아·마스체라노`,
+    `아르헨 2014~16 <b>3년 연속 메이저 결승 패배</b>(메시 은퇴 선언) → 2021·22·24 3연속 우승, 반전기의 우승+MVP+득점왕+도움왕·전 경기 POTM이 전부 메시 1인에게`,
+    `시장이 매긴 출발선(사전 배당률 실측): <span class="tr">포르투갈</span> 유로 2016 약 16/1(6~7순위)·월드컵 2018 25/1~28/1(8~9순위)·월드컵 2022 12/1~14/1(7~9순위) / <span class="tm">아르헨티나</span> 월드컵 2014 약 9/2(2순위)·코파 2021 +275(2순위)·월드컵 2022 약 5/1(2순위)·코파 2024 약 +175(1순위) — <b>아르헨은 상시 톱2 후보, 포르투갈은 6순위 밖</b>`,
+    `국가 체급 시계열(FIFA 랭킹, 2005~2026): <span class="tm">아르헨티나</span>가 시대의 약 70%에서 상위 — 통상 톱5, No.1 누적 약 4.5~5년 / <span class="tr">포르투갈</span>은 통상 5~8위, 역대 최고 3위 · 단 포르투갈이 위였던 구간도 5차례(최장 2017~2021 약 4년, 2010·2014 월드컵 직전 포함)`,
+    `<span class="tr">호날두</span> 유로 2016 개인 성분(대칭 검증): 대회 3골 3도움 — 단 토너먼트 라운드 성분은 16강 결승골 도움·4강 1골 1도움이 전부, 결승은 25분 부상 아웃 · 우승 경로는 조별 3무·90분 승리 1회`
+  ],
+  mLogic:"결과를 고른 당신에게 조건은 누구에게나 다르게 불공평했고, 역사는 그걸 뚫은 트로피 장부만 기억합니다. 그리고 강호 팀빨 반론에는 반례가 있습니다 — 바로 그 라인업으로 3년 연속 결승에서 무너지던 팀이었고, 못 만들던 우승을 만든 시기의 핵심 지표가 전부 한 사람에게 몰려 있습니다.",
+  mCrack:"균열 — 월드컵 2회 보유국이라는 출발선, 2022의 대진 구성, 최상급 동료진은 어떤 서사로도 지워지지 않는 보정 항목으로 남습니다.",
+  rLogic:"맥락을 고른 당신에게 같은 트로피 1개라도 무관국의 첫 1개와 강호의 1개는 기여의 크기가 다릅니다. 100년 넘게 메이저 0회이던 나라의 우승 3개가 전부 한 선수의 재임기에만 존재한다는 시계열은 가장 강력한 자연 실험입니다. 시장의 사전 배당률이라는 제3자 지표도 같은 방향입니다 — 아웃사이더로 든 우승과 최상위 우승후보로 든 우승은 기대치 대비 성취의 크기가 다릅니다.",
+  rCrack:"균열 — 자연 실험의 대조군을 끝까지 읽으면 흔들립니다. 포르투갈 메이저 3개의 성분: 2개는 신설 네이션스리그, 1개는 정규시간 1승 경로의 유로(결승 25분 부상 아웃). 그리고 같은 시계열 논리를 반대편에 걸면 — 28년 무관이던 아르헨티나의 우승 3개도 정확히 한 선수의 마지막 4년에만 존재하며, 그 3개는 신설 대회가 아니라 코파 2개와 월드컵입니다. '한 선수의 시대에만 존재하는 우승'이라는 구조는 양쪽 모두의 것입니다."
+},
+{ name:"기록 vs 시선",
+  idt:"이 축의 정체 — <b>측정된 기록만 믿을 것인가, 발롱도르·골든볼 같은 전문가 평가도 증거로 채택할 것인가.</b> 증거의 축입니다. 시선(투표)을 채택하면 8대5의 메시가, 시선을 기각하고 기록만 남기면 골의 누적 기록을 쥔 호날두가 유리해집니다 — 무엇을 증거로 인정하느냐가 곧 판정입니다.",
+  data:[
+    `발롱도르 <span class="tm">메시 8회</span> vs <span class="tr">호날두 5회</span> · 월드컵 골든볼 <span class="tm">메시 2회(대회 역사상 유일)</span>`,
+    `단, 전문가 투표도 심사단에 따라 갈림: UEFA 올해의 선수(유럽 무대 심사단, 2011 신설~2023 폐지) <span class="tr">호날두 3회</span> vs <span class="tm">메시 2회</span> — 유일한 2연패 수상자도 호날두`,
+    `<b>2010 발롱도르</b>: 월드컵 우승을 결승골로 완성한 이니에스타(와 사비)를 제치고, 그 대회 무득점 8강 탈락의 메시가 수상`,
+    `<b>2013</b>: 트레블의 리베리를 제치고 호날두 수상 · <b>2022 골든볼</b>: 결승 해트트릭+대회 8골 득점왕 음바페 대신 메시`,
+    `투표와 기록이 일치한 사례: <span class="tm">메시</span> 2021 코파 우승+MVP+득점왕+도움왕 동시 석권(메이저 유일) · 2022 전 경기 골+전 경기 POTM(역사상 유일)`,
+    `'순수 기록'끼리의 대차대조(대칭 검증): 경기당 골(클럽 0.83 vs 0.76)·통산 도움(약 418 vs 261)·경기당 공격포인트(1.15 vs 0.93)는 <span class="tm">메시</span> 우위 / 통산 골(약 976 vs 919)·헤더 골(157 vs 31)·PK 골(184 vs 115)은 <span class="tr">호날두</span> 우위`
+  ],
+  mLogic:"시선을 고른 당신에게 축구에는 기록지에 찍히지 않는 지배력(탈압박, 수비를 끌고 다니는 중력, 라인을 부수는 패스)이 있고, 그것을 잰 유일한 도구가 그 시대를 직접 본 전문가들의 20년 넘는 평가입니다. 서로 독립적인 주체들이 같은 방향(8대5, 골든볼 2회)을 가리켰고, 2021 코파와 2022처럼 기록과 투표가 정확히 일치한 해도 존재합니다.",
+  mCrack:"균열 — 2010은 이 측정기가 명성과 서사에 흔들린다는 실증이며, 2013과 2022 골든볼에서 같은 패턴이 반복됐습니다. 계통 오차가 반복되는 측정기의 신뢰 구간은 좁게 잡아야 합니다.",
+  rLogic:"기록을 고른 당신의 기준은 과학의 기준입니다. 누가 세어도 같은 값이 나오는 것만이 반증 가능한 증거이고, 투표의 오염은 투표 기관 스스로 2010에 증명했습니다. 이 잣대에서 호날두가 이기는 것의 실체는 분명합니다 — 축구의 최종 화폐인 골의 역대 기록 전부(통산·A매치·챔스·유로 최다), UEFA 공식 챔스 어시스트 1위, 월드컵 6개 대회 연속 득점 — 재검표 가능한 '역대 1위' 팻말의 다수입니다. 그리고 '전문가의 시선'조차 한 방향이 아닙니다 — UEFA 올해의 선수는 호날두 3회 대 메시 2회로, 심사단이 어디서 보느냐에 따라 시선의 판정은 갈립니다.",
+  rCrack:"균열 — '기록만 증거'라는 원칙은 자기 진영의 목록도 벱니다. 이 진영이 애용하는 3라운드 연속 MOM과 발롱도르 5회 역시 전부 심사와 투표입니다. 그리고 투표를 전부 걷어내도 기록의 세계는 하나가 아닙니다 — 총량(통산 골·헤더·PK)은 호날두의 것이지만, 비율(경기당 골 0.83 대 0.76·경기당 공격포인트 1.15 대 0.93·통산 도움 약 418 대 261)은 메시의 것입니다. '기록의 다수가 호날두'라는 결론은 총량으로 셀 때만 성립하며, 어떤 셈법을 고를지의 선별이 곧 이 사이트가 한계 고지에서 인정한 편집입니다."
+}
+];
+
+/* ===================== STATE ===================== */
+let heart=null, DISPLAY=[], answers=[], cur=0, page=0, pendingDemo=[], statsFlushed=false;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function buildDisplay(){
+  const arr=shuffle(ITEMS.slice());
+  arr.splice(4,0,IMC);             // 확인 문항은 5번째(2페이지 중앙) 고정
+  DISPLAY=arr; answers=new Array(arr.length).fill(null);
+}
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  window.scrollTo(0,0);
+}
+/* 인트로는 페이지를 연 직후의 '첫 화면'으로만 표시됩니다.
+   '시작하기'를 누르는 순간 DOM에서 제거되어, 그 이후 플로우에서는 다시 나타나지 않습니다.
+   (새로 접속하면 다시 첫 화면으로 나옵니다) */
+function killHero(){
+  const h=document.getElementById('sHero');
+  if(h) h.remove();
+}
+function startFlow(){
+  heart=null;
+  killHero();
+  showVote();
+}
+function demoDone(skip){
+  pendingDemo=[];
+  if(!skip){
+    ['dAge','dWatch'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el && el.value) pendingDemo.push(id.slice(1).toLowerCase()+'_'+el.value);
+    });
+  }
+  if(DISPLAY.length===0) buildDisplay();   // 뒤로 왔다 재진입 시 답변 보존
+  go('sQuiz'); renderPage();
+}
+function showVote(){
+  document.getElementById('voteSub').textContent='계산하지 마세요. 근거도 필요 없습니다. 20년 넘게 그들을 지켜본 당신의 가슴이 먼저 말하게 하세요. 이 선택은 마지막에 다시 만나게 됩니다.';
+  go('sVote');
+}
+function heartVote(side){
+  heart=side;
+  go('sDemo');
+}
+
+const PAGES=[[0,1,2],[3,4,5],[6,7,8]];
+function renderPage(){
+  document.getElementById('pnum').textContent=page+1;
+  const qh=document.getElementById('quizHead'); if(qh) qh.style.display=(page===0?'block':'none');
+  const answered=answers.filter(a=>a!==null).length;
+  document.getElementById('pfill').style.width=(answered/DISPLAY.length*100)+'%';
+  const letters=['A','B','C','D','E'];
+  let html='';
+  PAGES[page].forEach(di=>{
+    const it=DISPLAY[di];
+    const isI=it.id==='IMC';
+    const a=answers[di];
+    let block=`<div class="qblock"><div class="qnum">${isI?(LANG==='en'?'Reliability check':'신뢰도 확인'):(LANG==='en'?'Item ':'문항 ')+(di<4?di+1:di)}</div>
+      <div class="qtext">${it.q}</div>`;
+    if(!isI){
+      block+=`<div class="polegrid">
+        <div class="pole"><span class="pm">◀ A·B</span><span class="pd"><b>${it.l1}</b><br>${it.d1}</span></div>
+        <div class="pole"><span class="pm">D·E ▶</span><span class="pd"><b>${it.l2}</b><br>${it.d2}</span></div>
+      </div>`;
+    }
+    const micro=LANG==='en'?['Definitely','Slightly','Middle','Slightly','Definitely']:['확실히','조금','중간','조금','확실히'];
+    const szc=['sz2','sz1','sz0','sz1','sz2'];
+    block+=`<div class="scalewrap">`;
+    if(!isI) block+=`<span class="sideL">${it.l1}</span>`;
+    block+=`<div class="dots">`;
+    letters.forEach((L,i)=>{
+      block+=`<div class="dcol"><button class="lc ${isI?'sz1':szc[i]}${a===i?' sel':''}" onclick="choose(${di},${i})">${L}</button><span class="micro">${isI?'':micro[i]}</span></div>`;
+    });
+    block+=`</div>`;
+    if(!isI) block+=`<span class="sideR">${it.l2}</span>`;
+    block+=`</div><div class="lcap${a===null?' empty':''}">${a===null?(isI?(LANG==='en'?'Please select D':'D를 선택해주세요'):(LANG==='en'?'The further out, the more certain you are':'양끝으로 갈수록 그쪽 마음이 확실하다는 뜻입니다')):(LANG==='en'?'Selected: ':'선택: ')+optLabels(it)[a]}</div></div>`;
+    html+=block;
+  });
+  document.getElementById('pageWrap').innerHTML=html;
+  document.getElementById('backBtn').disabled=false;
+  document.getElementById('backBtn').textContent = page===0 ? (LANG==='en'?'← Back (edit sample info)':'← 이전 (표본 정보)') : (LANG==='en'?'← Previous page':'← 이전 페이지');
+  const done=PAGES[page].every(di=>answers[di]!==null);
+  const nb=document.getElementById('nextBtn');
+  nb.textContent = page===2 ? (LANG==='en'?'See results →':'결과 보기 →') : (LANG==='en'?'Next →':'다음 →');
+  nb.style.opacity=done?'1':'0.4';
+  nb.style.pointerEvents=done?'auto':'none';
+}
+function choose(di,i){
+  answers[di]=i;
+  renderPage();
+}
+function nextPage(){
+  if(!PAGES[page].every(di=>answers[di]!==null))return;
+  if(page<2){page++;renderPage();window.scrollTo({top:0,behavior:'smooth'});}
+  else{ finish(); }
+}
+function prevPage(){ if(page>0){page--;renderPage();window.scrollTo({top:0,behavior:'smooth'});} else { go('sDemo'); } }
+
+/* ===================== SCORING ===================== */
+function compute(){
+  let S=0; const ax=[0,0,0,0,0,0,0,0]; const axMax=[0,0,0,0,0,0,0,0];
+  let imcOK=true; const scored=[];
+  DISPLAY.forEach((it,di)=>{
+    const a=answers[di];
+    if(it.id==='IMC'){ imcOK=(a===3); return; }
+    scored.push(a);
+    const v=2-a;                        // 첫 번째 극 쪽 +2 … 반대 극 -2
+    const s=(it.k1==='m'? v : -v);      // +는 메시 방향
+    S+=s; ax[it.ax]+=s; axMax[it.ax]+=2;
+  });
+  // 스트레이트라이닝: 8개 중 7개 이상 동일 응답
+  const counts={}; scored.forEach(a=>counts[a]=(counts[a]||0)+1);
+  const straight=Math.max(...Object.values(counts))>=7;
+  const reliable=imcOK&&!straight;
+  const verdict = S>=2?'m':(S<=-2?'r':'b');
+  return {S,ax,axMax,imcOK,straight,reliable,verdict};
+}
+
+/* ===================== RESULT ===================== */
+function finish(){
+  const R=compute();
+  if(!statsFlushed){
+    Stats.record('heart',heart);
+    pendingDemo.forEach(d=>Stats.record('demo',d));
+    if(R.reliable) Stats.record('fact',R.verdict);
+    statsFlushed=true;
+  }
+  go('sResult');
+
+  // 신뢰도 배지
+  document.getElementById('relBadge').innerHTML = R.reliable
+    ? `<span class="rel-badge rel-ok">${LANG==='en'?'✓ Reliability checks passed (attention & consistency)':'✓ 응답 신뢰도 검사 통과 (주의 확인·일관 응답 점검)'}</span>`
+    : `<span class="rel-badge rel-warn">${LANG==='en'?('△ Low response reliability — '+(!R.imcOK?'attention check failed':'')+(!R.imcOK&&R.straight?' · ':'')+(R.straight?'repeated identical answers':'')+' · results below are for reference'):('△ 응답 신뢰도 주의 — '+(!R.imcOK?'확인 문항 미통과':'')+(!R.imcOK&&R.straight?' · ':'')+(R.straight?'동일 응답 반복 감지':'')+' · 아래 결과는 참고용입니다')}</span>`;
+
+  // 진심
+  const hEl=document.getElementById('myHeart');
+  hEl.textContent=heart==='m'?'Messi':'Ronaldo';
+  hEl.className='pv disp '+heart;
+
+  // 팩트
+  const fEl=document.getElementById('myFact');
+  const names={m:'Messi',r:'Ronaldo',b:'Balance'};
+  fEl.textContent=names[R.verdict];
+  fEl.className='pv disp '+(R.verdict==='b'?'g':R.verdict);
+  const band = LANG==='en'
+    ? (R.S>=6?'clearly Messi-type values':R.S>=2?'values leaning Messi':R.S<=-6?'clearly Ronaldo-type values':R.S<=-2?'values leaning Ronaldo':'balanced values that chose no camp')
+    : (R.S>=6?'뚜렷한 메시형 가치관':R.S>=2?'메시 쪽으로 기운 가치관':R.S<=-6?'뚜렷한 호날두형 가치관':R.S<=-2?'호날두 쪽으로 기운 가치관':'어느 진영도 고르지 않은 균형 가치관');
+  document.getElementById('myFactS').textContent=(LANG==='en'?`Total ${R.S>0?'+':''}${R.S} — ${band}. Sum of 8 bipolar items × lean intensity (−2 to +2).`:`총점 ${R.S>0?'+':''}${R.S} — ${band}. 8개 양극 문항 × 기울기 강도(−2~+2)의 합산 결과입니다.`);
+  document.getElementById('sNeedle').style.left=((FLIP?16+R.S:16-R.S)/32*100)+'%';
+
+  // 세계 집계
+  Stats.fetchAll().then(s=>{
+    fillBar('h',s.hm,s.hr,0,s.demo);
+    fillBar('f',s.fm,s.fr,s.fb,s.demo);
+  });
+
+  // 소신/오염 판정
+  const box=document.getElementById('verdictBox');
+  const HN={m:LANG==='en'?'Messi':'메시', r:LANG==='en'?'Ronaldo':'호날두'};
+  if(R.verdict==='b'){
+    box.innerHTML=LANG==='en'
+    ?`<div class="vt"><span class="ok">◎ Balance</span> — your values chose no camp.</div>
+    <p>Across 8 items you gave both camps almost equal weight. Your heart pick (<b>${HN[heart]}</b>) is then most likely not a product of logic but <b>pure aesthetic taste for how they play</b> — and that is a completely legitimate GOAT. Read the 8 axes below and you will feel why this debate has lasted more than 20 years.</p>`
+    :`<div class="vt"><span class="ok">◎ 균형</span> — 당신의 가치관은 진영을 고르지 않았습니다.</div>
+    <p>8개 문항에서 당신은 양쪽 진영의 논리에 거의 같은 무게로 동의했습니다. 이 경우 당신의 진심 픽(<b>${HN[heart]}</b>)은 논리의 산물이 아니라 <b>플레이의 아름다움에 대한 순수한 미적 취향</b>일 가능성이 높습니다 — 그리고 그것은 완전히 정당한 GOAT입니다. 아래 8개 축의 데이터를 읽으면, 왜 이 논쟁이 20년 넘게 끝나지 않는지 체감하게 될 것입니다.</p>`;
+  } else if(heart===R.verdict){
+    box.innerHTML=LANG==='en'
+    ?`<div class="vt"><span class="ok">✓ Match</span> — your belief is conviction.</div>
+    <p>The GOAT your heart chose and the GOAT your football-free values point to are <b>the same person</b>. Your conclusion is not emotion-contaminated — it stands on your consistent philosophy of greatness. The raw data on the 8 axes below are its evidence. You are now a fan with receipts.</p>`
+    :`<div class="vt"><span class="ok">✓ 일치</span> — 당신의 믿음은 소신입니다.</div>
+    <p>가슴으로 고른 GOAT와, 축구를 지운 8개 가치 문항이 가리킨 GOAT가 <b>같은 사람</b>입니다. 당신의 결론은 감정에 오염된 것이 아니라, 위대함에 대한 당신의 일관된 철학 위에 서 있습니다. 아래 8개 축의 로우데이터가 그 철학의 근거들입니다 — 이제 당신은 근거를 가진 팬입니다.</p>`;
+  } else {
+    box.innerHTML=LANG==='en'
+    ?`<div class="vt"><span class="warn">△ Mismatch</span> — your belief deserves a check.</div>
+    <p>Your heart chose <b>${HN[heart]}</b>, but your football-free values point to <b>${HN[R.verdict]}</b> (total ${R.S>0?'+':''}${R.S}). Two possibilities: your heart pick is pure aesthetic taste (completely legitimate) — or it rests on an impression someone's propaganda built. Read the raw data on the 8 axes below and judge for yourself.</p>`
+    :`<div class="vt"><span class="warn">△ 불일치</span> — 당신의 믿음, 점검이 필요합니다.</div>
+    <p>가슴으로 고른 GOAT는 <b>${HN[heart]}</b>였지만, 축구를 지운 당신의 가치관은 <b>${HN[R.verdict]}</b>를 가리켰습니다(총점 ${R.S>0?'+':''}${R.S}). 두 가지 가능성이 있습니다 — 당신의 진심 픽이 플레이의 아름다움에 대한 순수한 미적 취향이거나(그렇다면 완전히 정당합니다), 혹은 누군가의 선동이 만든 인상 위에 서 있거나. 아래 8개 축의 로우데이터를 읽고, 어느 쪽인지 스스로 판정해보세요.</p>`;
+  }
+
+  // 프로필
+  const prof=document.getElementById('prof');
+  let ph='';
+  R.ax.forEach((v,i)=>{
+    const max=R.axMax[i];
+    const pct=Math.abs(v)/max*50;
+    const cls=v>0?'m':(v<0?'r':'n');
+    const label=v>0?(LANG==='en'?`Messi +${v}`:`메시 +${v}`):(v<0?(LANG==='en'?`Ronaldo ${v}`:`호날두 ${v}`):(LANG==='en'?'Balance 0':'균형 0'));
+    ph+=`<div class="prow">
+      <div class="pt"><span class="pn">${AXMETA[i].name}</span><span class="pscore ${cls}">${label} / ±${max}</span></div>
+      <div class="ptrk"><div class="pmid"></div>${v!==0?`<div class="pfl ${cls}" style="width:${pct}%"></div>`:''}</div>
+    </div>`;
+  });
+  prof.innerHTML=ph;
+
+  // 축별 카드 (전면 노출)
+  const xp=document.getElementById('xplain');
+  let xh='';
+  const SL=LANG==='en'?{q:'Your item & answer',d:'Raw data — what both camps fight over',m:'The Messi camp&rsquo;s case',r:'The Ronaldo camp&rsquo;s case',ax:'Axis '}:{q:'측정 문항과 당신의 응답',d:'로우데이터 — 양 진영이 싸우는 실제 기록',m:'메시 진영의 논리',r:'호날두 진영의 논리',ax:'축 '};
+  AXMETA.forEach((ax,i)=>{
+    const v=R.ax[i];
+    const lean=v>0?'m':(v<0?'r':'n');
+    const leanTxt=LANG==='en'?(v>0?`Your lean on this axis = Messi camp (+${v})`:(v<0?`Your lean = Ronaldo camp (${v})`:'Your lean = balanced (0)')):(v>0?`당신의 이 축 성향 = 메시 진영 (+${v})`:(v<0?`당신의 이 축 성향 = 호날두 진영 (${v})`:'당신의 이 축 성향 = 균형 (0)'));
+    // 이 축을 측정한 문항 + 응답
+    let qh='';
+    DISPLAY.forEach((it,di)=>{
+      if(it.id==='IMC'||it.ax!==i)return;
+      const a=answers[di];
+      qh+=`<div class="qi"><span class="qtag">${it.id}</span><span>${it.q}</span><span class="ans">${optLabels(it)[a]}</span></div>`;
+    });
+    const rows=ax.data.map(d=>`<div class="drow">${d}</div>`).join('');
+    xh+=`<div class="xp">
+      <div class="xp-top"><span class="xp-num">${SL.ax}${i+1} · ${ax.name}</span><span class="xp-lean ${lean}">${leanTxt}</span></div>
+      <p class="xp-idt">${ax.idt}</p>
+      <div class="slab">${SL.q}</div>
+      <div class="qitems">${qh}</div>
+      <div class="slab">${SL.d}</div>
+      <div class="datarows">${rows}</div>
+      <div class="slab blue">${SL.m}</div>
+      <p>${ax.mLogic}</p>
+      <div class="crack">${ax.mCrack}</div>
+      <div class="slab red2">${SL.r}</div>
+      <p>${ax.rLogic}</p>
+      <div class="crack">${ax.rCrack}</div>
+    </div>`;
+  });
+  xp.innerHTML=xh;
+}
+
+function fillBar(prefix,mc,rc,bc,demo){
+  const total=mc+rc;
+  const pM=total?Math.round(mc/total*100):50;
+  const pR=total?100-pM:50;
+  // 전체 참여자의 다수 픽 헤드라인 (내 픽 카드와 대칭 표기)
+  const pickEl=document.getElementById(prefix+'WorldPick');
+  if(pickEl){
+    let txt='—', cls='g';
+    if(prefix==='f' && bc>mc && bc>rc){ txt='Balance'; cls='g'; }
+    else if(total>0){
+      if(mc>rc){ txt='Messi'; cls='m'; }
+      else if(rc>mc){ txt='Ronaldo'; cls='r'; }
+      else { txt=LANG==='en'?'Tie':'동률'; cls='g'; }
+    }
+    pickEl.textContent=txt;
+    pickEl.className='pv disp '+cls;
+  }
+  document.getElementById(prefix+'PctM').textContent=FLIP?`${total?pM+'%':'—%'} MESSI`:`MESSI ${total?pM+'%':'—%'}`;
+  document.getElementById(prefix+'PctR').textContent=FLIP?`RONALDO ${total?pR+'%':'—%'}`:`${total?pR+'%':'—%'} RONALDO`;
+  document.getElementById(prefix+'BarM').style.width=(total?pM:50)+'%';
+  document.getElementById(prefix+'BarR').style.width=(total?pR:50)+'%';
+  document.getElementById(prefix+'N').textContent=
+    LANG==='en'
+    ? ((demo?'※ Demo tally (this device) — global tally activates once a backend is connected · ':'')+`${total} participants`+(bc?` (+${bc} balance verdicts)`:''))
+    : ((demo?'※ 현재는 데모 집계(이 기기 기준) — 실서비스 집계는 백엔드 연결 후 활성화 · ':'')+`참여 ${total}명`+(bc?` (균형 판정 ${bc}명 별도)`:''));
+}
+
+function restart(){ heart=null; DISPLAY=[]; answers=[]; page=0; pendingDemo=[]; statsFlushed=false; startFlow(); }
+function shareResult(){
+  const R=compute();
+  const nm={m:LANG==='en'?'Messi':'메시',r:LANG==='en'?'Ronaldo':'호날두',b:LANG==='en'?'a perfect balance':'완벽한 균형'};
+  const hn=nm[heart];
+  let text;
+  if(LANG==='en'){
+    text = R.verdict==='b'
+      ? `My heart pick is ${hn}, but my football-free values chose no camp (balance). Is your belief taste, or propaganda?`
+      : (heart===R.verdict
+        ? `My heart pick is ${hn} — and my 8 value items agree: ${nm[R.verdict]} (total ${R.S>0?'+':''}${R.S}). I am a fan with receipts. Are you?`
+        : `Shock — my heart pick is ${hn}, but my football-free values point to ${nm[R.verdict]} (total ${R.S>0?'+':''}${R.S}). Is your belief taste, or propaganda?`);
+  } else {
+    text = R.verdict==='b'
+      ? `내 진심 픽은 ${hn}, 그런데 축구를 지운 내 가치관은 진영을 고르지 않았다(균형). 당신의 믿음은 취향인가, 선동인가?`
+      : (heart===R.verdict
+        ? `내 진심 픽도 ${hn}, 8개 가치관 문항의 팩트 판정도 ${nm[R.verdict]}(총점 ${R.S>0?'+':''}${R.S}) — 나는 근거 있는 소신파였다. 당신은?`
+        : `충격 — 내 진심 픽은 ${hn}인데, 축구를 지운 내 가치관은 ${nm[R.verdict]}를 가리켰다(총점 ${R.S>0?'+':''}${R.S}). 당신의 믿음은 취향인가, 선동인가?`);
+  }
+  if(navigator.share){navigator.share({title:'TRUE GOAT',text,url:location.href}).catch(()=>{});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(text+' '+location.href).then(()=>{
+    const b=document.getElementById('shareBtn'),o=b.textContent;b.textContent=LANG==='en'?'Copied ✓':'복사됨 ✓';setTimeout(()=>b.textContent=o,1600);});}
+}
+/* ===================== ENGLISH CONTENT ===================== */
+const ITEMS_EN=[
+ {q:"Your child brings home an award. Which would make you happier?",l1:"the prestigious award",l2:"the hardest-won award",
+  d1:"An award the whole country knows — its name alone says everything",
+  d2:"An award famous as the hardest to win — only the very best compete for it"},
+ {q:"You are facing a major operation and can choose your surgeon. Which do you pick?",l1:"clutch surge",l2:"higher average",
+  d1:"The surgeon with a reputation for growing distinctly stronger the more life is on the line",
+  d2:"The surgeon who is excellent on average — but in the biggest operations, performs below their own average"},
+ {q:"If people remember you someday, which is more appealing?",l1:"raised everyone around",l2:"the one unmatched thing",
+  d1:"\u201CTheir own work was elite \u2014 and they raised everyone around them\u201D",
+  d2:"\u201CSay what you will \u2014 at that one thing, they were the greatest ever\u201D"},
+ {q:"You start a new game. Which is closer to your playstyle?",l1:"conquer the one",l2:"collect them all",
+  d1:"Pick the hardest single challenge and repeat it until perfect",
+  d2:"Collect every achievement and every ending, missing none"},
+ {q:"If you could choose your life's graph in advance, which one?",l1:"blazing peak",l2:"lasting summit",
+  d1:"A short stretch at a peak no one has ever reached — still excellent afterwards, but never that height again",
+  d2:"Short of that peak, but staying near the top until the day you retire — and the lifetime total you stack up ends up the largest of all"},
+ {q:"Which life appeals to you more?",l1:"valued everywhere",l2:"legend of one place",
+  d1:"Moving across cities and jobs, reaching the top everywhere you go",
+  d2:"Rooted in one place, becoming the legend of that town, that workplace"},
+ {q:"If your life is judged, how would you want it judged?",l1:"results only",l2:"starting line too",
+  d1:"Whatever my start, judge me only by the size of what I finally achieved",
+  d2:"Judge me together with the conditions I started from"},
+ {q:"Months of research, final purchase decision (car, appliance) \u2014 what do you trust?",l1:"hard numbers",l2:"expert judgment",
+  d1:"Measured data like failure rates and tested performance",
+  d2:"The verdict of longtime experts and long-term users"}
+];
+const IMC_EN={q:"This item checks response reliability. Please select D below."};
+const AXMETA_EN=[
+ {name:"Prestige vs Difficulty",
+  idt:"What this axis really was \u2014 <b>do you rank the World Cup's prestige above the Champions League's level of play?</b> The stage-selection axis.",
+  data:[
+   `<span class="tm">Messi</span> World Cup career <b>21 goals 12 assists = 33 contributions, all-time #1</b> \u00B7 2022: scored in every knockout game + POTM in every game (only player in 92 years)`,
+   `2022 path: <b>no top-10 opponent before the QF</b> \u00B7 3 of 5 knockout goals were penalties`,
+   `<span class="tr">Ronaldo</span> UCL <b>140 goals (#1) \u00B7 5 titles \u00B7 4 final goals</b> \u2014 but zero World Cup knockout goals across five tournaments through 2022 (his first came in 2026) \u00B7 benched for the 2022 R16 and QF`,
+   `Structural gap: no weak teams after the UCL QF / WC has big mismatches through the R16, and nationality (teammate lottery) is half the outcome`,
+   `NT difficulty (opponent ranking): most of FIFA's top 10 are usually European \u2014 Euro/Nations League opponents average higher rankings than Copa \u00B7 <span class="tm">Messi</span>'s four pre-QF opponents in 2022 (incl. Saudi Arabia, #51) averaged around #30`,
+   `NT difficulty (pre-tournament odds): Portugal were outsiders at Euro 2016 / Argentina were top favorites in 2021 and 2022`,
+   `<span class="tr">Ronaldo</span>'s Euro 2016 title path (symmetric audit): three group draws, through in 3rd place · one win inside 90 minutes all tournament (SF vs Wales) · R16 in extra time, QF on penalties, final in extra time (himself off injured at 25')`
+  ],
+  mLogic:"If you chose prestige: the World Cup offers three or four chances in a career, no transfer market, and the whole planet watching. All-time #1 in contributions there, plus the only 'scored + POTM in every knockout game' run in 92 years \u2014 against an opponent whose knockout tally on that stage is zero.",
+  mCrack:"Crack \u2014 prestige and measurement precision are different things. The 2022 draw and the 3-of-5 penalty share remain on record, and a stage where the teammate lottery is half the outcome is a noisy instrument for individual skill.",
+  rLogic:"If you chose difficulty: skill is measured by the level of the opposition. A stage with no weak teams after the QF \u2014 and its 20-plus-year ledger reads 140 vs 129 goals, 4 vs 2 final goals, 5 titles. Widen to national teams and the direction holds: by average opponent ranking and pre-tournament odds, outsider Portugal's titles were a steeper climb than favorite Argentina's.",
+  rCrack:"Crack \u2014 the definition of 'difficulty' flips against this camp first. The UCL is a stage with a transfer market \u2014 a climb made with Gal\u00e1ctico capital that can buy the world's best teammates \u2014 while the World Cup is fought with the nationality you were dealt. Open the path of the 'harder' international title: Euro 2016 was won via three group draws and a single win inside 90 minutes (Wales), and the other two majors are the Nations League, invented in 2019. The odds-based difficulty metric cuts both ways \u2014 it glorifies an outsider's title, and records that the team never dominated the tournament."},
+ {name:"Clutch & Big Games vs Consistency",
+  idt:"What this axis really was \u2014 <b>do you measure skill in decisive moments and big games (vs strong sides), or across the whole career sample?</b> Axis #1 of the GOAT debate.",
+  data:[
+   `<span class="tm">Messi</span>, entire major-tournament career (incl. WC 2026), open-play goals vs FIFA top-10: <b>essentially only the 2022 final extra-time goal vs France</b> \u2014 in 2026 all 8 goals came vs sides outside the top 10; blanks vs Switzerland, England and Spain (assist involvement existed)`,
+   `<span class="tm">Messi</span> Copa 2021: 4 goals = Bolivia \u00D72 + free kicks vs Chile/Ecuador / scoreless in the final`,
+   `<span class="tm">Messi</span>'s World Cup penalty composition: 4 goals from 8 career attempts \u2014 two misses in one tournament (2026), a World Cup first`,
+   `<span class="tr">Ronaldo</span> 2016-17 UCL QF\u2192final: <b>10 goals + MOM in three straight rounds (only ever)</b> \u00B7 17-18: scored in 11 straight UCL games`,
+   `<span class="tm">Messi</span>'s big-stage record is real: 4 goals vs Arsenal (2010 QF) \u00B7 5 vs Leverkusen (2012) \u00B7 scored in the 2009 & 2011 UCL finals (2011 MOM) \u00B7 0.81 vs 0.76 UCL goals/game \u00B7 10 World Cup knockout assists \u2014 all-time #1 (next best: 4)`,
+   `<span class="tr">Ronaldo</span>'s NT big-stage composition (symmetric audit): Euro 2016 \u2014 3 goals 3 assists = 2 goals 1 assist vs Hungary (group) + assist on the R16 winner vs Croatia + goal & assist in the SF vs Wales (injured off in the final) \u00B7 Nations League 2019: SF hat-trick vs Switzerland`,
+   `<span class="tr">Ronaldo</span>'s clutch-extreme composition (symmetric audit): 2008 final \u2014 opening header, then missed his shootout kick (the team won 6-5) \u00B7 2012 SF \u2014 missed his shootout kick (eliminated) \u00B7 2014 final goal = a 120th-minute penalty at 3-1`
+  ],
+  mLogic:"If you chose consistency: a long sample strips out luck, referees and form \u2014 what remains is true skill. And that true value points the same way on every stage \u2014 0.83 vs 0.76 club goals per game, 0.81 vs 0.76 in the UCL, 1.15 vs 0.93 contributions per game, the only simultaneous all-time goals-and-assists lead in La Liga, the all-time World Cup contributions record (33). The 4-goal and 5-goal nights plus goals in two UCL finals refute the 'nothing on big stages' frame. Only in the narrow strong-team sample does the other side's case strengthen \u2014 and there is no statistical reason a narrow sample should outrank the full one.",
+  mCrack:"Crack \u2014 narrow to the stages where only strong teams remain, and the record says Messi's big-game finishing fell short. Across his entire major-tournament career (2026 World Cup included), open-play goals vs FIFA top-10 opponents: essentially one \u2014 the 2022 final extra-time goal; in 2026 all eight goals came against sides outside the top 10, with blanks vs Switzerland, England and Spain (assist involvement existed). By the same yardstick Ronaldo has roughly five or six (two vs the Netherlands at Euro 2012, Spain 2018, Germany and Spain at the 2025 Nations League \u2014 rankings as of the time), plus the 16-17 UCL knockout ten with three straight MOMs \u2014 the direction of the big-game totals is clear.",
+  rLogic:"If you chose clutch: this is how Jordan became GOAT \u2014 finals, not averages. Ten knockout goals with three straight MOMs in 16-17, eleven straight scoring games \u2014 while the other side's top-10 open-play tally is one extra-time goal, with 3 of 5 knockout goals from the spot. And this is not only a UCL story \u2014 two vs the Netherlands at Euro 2012, the 2018 World Cup hat-trick vs Spain, the 2019 Nations League hat-trick vs Switzerland, goals vs Germany and Spain at the 2025 finals: against top sides the totals point the same way on every stage (~5-6 open-play goals vs FIFA top-10, against essentially one). Finally, clutch weight follows team status: winning decisive moments as an outsider's ace weighs more than as a favorite's.",
+  rCrack:"Crack \u2014 tighten the gauge to the heaviest stages and it stabs the other way. Ronaldo's World Cup knockout tally through 2022 was zero across five tournaments (his first came only in 2026), and his career tally in Euro/World Cup finals is zero (scoreless in the Euro 2004 final, injured off in 2016). That the 'king of clutch' stayed silent for twenty years on football's two heaviest stages \u2014 World Cup knockouts and major finals \u2014 is the reading of the same gauge. If UCL clutch is pure ability, clutch theory cannot explain why it evaporated only in a national-team shirt."},
+ {name:"One thing vs Many things",
+  idt:"What this axis really was \u2014 <b>the extreme of the one job (goals), or the combination of two jobs (goals + creation)?</b> The very type-difference between the two players.",
+  data:[
+   `<span class="tr">Ronaldo</span> career <b>900+ goals \u2014 all-time #1</b> \u00B7 most international goals & caps \u00B7 top scorer in <b>five arenas (PL, La Liga, Serie A, UCL, Euro \u2014 only ever)</b>`,
+   `<span class="tm">Messi</span> career assists <b>350+ vs 250+</b> \u00B7 only player to hold a league's all-time goals (474) AND assists records \u00B7 91 goals in calendar 2012 (Guinness)`,
+   `But in UCL career assists <b>the all-time leader is still Ronaldo (UEFA-official 42 \u2014 Di Mar\u00eda 41, Messi 40)</b> \u2014 narrow the stage to the UCL and the creation gap reverses (Opta's recount restoring pre-2002 data has Giggs 41 \u00b7 Ronaldo 40 \u00b7 Messi 39)`,
+   `Reverse test: after <span class="tm">Messi</span> left, Barcelona crashed out of two straight UCL group stages, 0W4L and scoreless vs Bayern`,
+   `<span class="tr">Ronaldo</span>'s 900+ composition (symmetric audit): 184 career penalty goals — all-time most, ~19% of his total (<span class="tm">Messi</span> ~115, ~12%) · his 129 goals since 2023 came at a Saudi club (102 in the league)`
+  ],
+  mLogic:"If you chose the combination: goals and creation are two different jobs, and being all-time elite at both is a different order of achievement. Holding one league's all-time goals and assists records simultaneously is unprecedented \u2014 and Barcelona's collapse the moment he left is field evidence that the creative environment was largely his output.",
+  mCrack:"Crack \u2014 narrow the stage to the UCL and the assist gap doesn't just vanish, it reverses: the competition's all-time assist leader is still Ronaldo (UEFA-official 42 vs Messi's 40). A league-built gap that doesn't reproduce on the top stage carries environment in the stat.",
+  rLogic:"If you chose the one extreme: goals are football's only currency. 900+, most international goals, and top scorer across five different arenas \u2014 football history has no substitute case.",
+  rCrack:"Crack \u2014 the environment-adjustment knife cuts both ways: his supply line was \u00D6zil, Bale, Kroos and Modri\u0107, plus the all-time-most 184 career penalties. And 'most in total' is also 'most games played' \u2014 the per-game rate favored Messi throughout (0.81 vs 0.76 in the UCL), and once the total is assayed for its penalty content, 'the extreme of the one job' can be re-described as 'the man who shot for the longest, the most'."},
+ {name:"Completeness vs Height",
+  idt:"What this axis really was \u2014 <b>the grand slam of every trophy, or repeat ascents of the highest peak (UCL)?</b> How to count trophies.",
+  data:[
+   `<span class="tm">Messi</span>'s set: WC 1 \u00B7 Copa 2 \u00B7 UCL 4 \u00B7 La Liga 10 \u00B7 Ballon d'Or 8 \u00B7 Golden Ball 2 \u2014 <b>every honor football gives</b>`,
+   `But of the 4 UCLs, <b>2006 = injured from the R16, missed every remaining game (not in the final squad)</b> \u2014 the 'really 3' debate`,
+   `<span class="tr">Ronaldo</span> UCL 5, protagonist share in all (08 top scorer+final goal / 14 final goal / 16 last shootout kick / 17 two final goals / 18 top scorer 15) \u00B7 <b>7\u00D7 UCL top scorer</b>`,
+   `<span class="tr">Ronaldo</span> Euro 1 + Nations League 2 \u2014 but <b>no World Cup</b>`,
+   `And two of the three international trophies are <b>Nations Leagues</b> \u2014 a competition whose first finals were held in 2019, with a live weight-class debate vs the Euro and World Cup`
+  ],
+  mLogic:"If you chose completeness: the grand-slam logic. Even dropping 2006, the remaining three UCLs carry clear shares (two final goals, a treble carry), while the other side's World Cup blank is a problem of existence, not composition \u2014 no adjustment fills a zero.",
+  mCrack:"Crack \u2014 weight by difficulty instead of count, and five ascents of the highest peak plus seven top-scorer titles, from a nation that had never won anything, move the scale.",
+  rLogic:"If you chose height: the mountaineer's logic \u2014 eight peaks once vs Everest five times. The point is the repetition in 'five': one title can carry luck, but five ascents across two clubs \u2014 including the 16-17-18 three-peat, the only one of the Champions League era, with the top-scorer crown in all three seasons \u2014 reject the luck hypothesis. And all five carry protagonist shares, as itemized above.",
+  rCrack:"Crack \u2014 the World Cup blank is a matter of zero, not 'how many', and no altitude-weighting grants the title of the one who did it all. 'The UCL is the highest mountain' is itself this camp's assumption \u2014 the peak football history has actually ranked by is the World Cup (the thrones of Pel\u00e9 and Maradona are the proof). And the climbing log carries a footnote: in the only spell away from a top base camp (three years at Juventus), the UCL ended QF, R16, R16 \u2014 no ascents were made from outside the elite camps."},
+ {name:"Peak & Rates vs Longevity & Totals",
+  idt:"What this axis really was \u2014 <b>the short, absolute peak (2009\u201312) plus career-long efficiency (rates), or the cumulative totals stacked by a twenty-plus-year hold?</b> The shape of greatness.",
+  data:[
+   `<span class="tm">Messi</span> 2011-12: <b>73 goals 29 assists</b> \u00B7 91 goals in calendar 2012 (Guinness) \u2014 a statistical ceiling nobody has approached since`,
+   `The peak's companions: <b>Xavi\u00B7Iniesta\u00B7Busquets</b> (the midfield of Spain's Euro08\u2013WC10\u2013Euro12 treble) + Guardiola \u2014 yet Villa/Pedro on the same supply scored ~20`,
+   `<span class="tr">Ronaldo</span> at 23 (Man Utd): UCL+PL+Ballon d'Or \u00B7 at 31\u201333: UCL three-peat + <b>3 straight UCL top-scorer titles</b>`,
+   `<span class="tr">Ronaldo</span> at Real: <b>450 goals in 438 games \u2014 the only player with more goals than games</b>`,
+   `<span class="tr">Ronaldo</span>'s longevity composition (symmetric audit): 79 of the 450 Real goals were penalties (~18%) \u00b7 the post-2023 'hold' is measured in the Saudi league (102 league goals) \u2014 not a top-five-league sample`,
+   `Peak altitude, head-to-head: best calendar year \u2014 <span class="tm">Messi</span> 91 (2012) vs <span class="tr">Ronaldo</span> 69 (2013) \u00b7 best season \u2014 73 (11-12) vs 61 (14-15)`,
+   `The peak-&-rates side of the ledger (full careers): goals per game \u2014 club <span class="tm">Messi 0.83</span> vs <span class="tr">Ronaldo 0.76</span> \u00b7 contributions per game <span class="tm">1.15</span> vs <span class="tr">0.93</span>`,
+   `<span class="tr">Ronaldo</span>'s longevity sum = the cumulative record set: most official career goals (976) \u00b7 most international goals (146) \u00b7 most UCL (140) \u00b7 most Euro (14) \u00b7 scored in <b>six straight World Cups (2006\u20132026, only ever)</b> \u2014 <span class="tm">Messi</span>'s 2010 blank leaves five`
+  ],
+  mLogic:"If you chose the peak: greatness is altitude reached. 73+29 and 91 in a year are heights football's statistics had never seen \u2014 and the control group is decisive: Villa and Pedro, fed by the same midfield, scored around 20 while Messi scored 73. And the peak's logic is also the logic of rates \u2014 totals grow with games played; rates only with skill. Per game, the leader across both careers was Messi (0.83 vs 0.76 club goals, 1.15 vs 0.93 contributions) \u2014 the player who made more of the same ninety minutes.",
+  mCrack:"Crack \u2014 that peak is bound to one era and an all-time environment (a treble midfield plus Guardiola); the co-authorship debate never fully closes.",
+  rLogic:"If you chose longevity: a short explosion is talent+environment+luck; a twenty-year hold is skill with the luck stripped out. Peaks at 23 (Man Utd) and 31\u201333 (Real), reproduced across two environments and two ages \u2014 and more goals than games across nine years at Real. And the sum of that hold took every cumulative record \u2014 most official career goals (976), most international goals (146), most UCL goals (140), most Euro goals (14), and goals in six straight World Cups (2006\u20132026, the only player ever; Messi's 2010 blank leaves him at five).",
+  rCrack:"Crack \u2014 the second peak (31\u201333) came at the richest squad ever assembled, and the first time he stood in a team that wasn't the strongest (Juve, Utd II), the UCL read R16\u2013QF and the end was no trophy and a terminated contract. A hold reproduced only in elite environments gets back exactly the 'environment' gauge this camp applied to Messi's peak. And the altitude is still no contest \u2014 no Ronaldo season ever approached 73+29 or 91 in a calendar year (his bests: 61 in a season, 69 in a year)."},
+ {name:"Depth vs Range",
+  idt:"What this axis really was \u2014 <b>the legend who rewrote one club's entire history, or the conqueror who reproduced the summit across leagues?</b> Separating environment from skill.",
+  data:[
+   `<span class="tm">Messi</span> at Barcelona: 672 goals \u00B7 most assists \u00B7 35 trophies \u2014 <b>all-time #1 in every club category</b> \u00B7 even in the 20-21 financial collapse: league top scorer (30) + Copa del Rey`,
+   `<span class="tr">Ronaldo</span>: <b>league title + top scorer in all three of PL, La Liga, Serie A</b> \u00B7 instant summit each move (33 goals at Real; 21 + MVP at Juve at 34)`,
+   `Late-career samples cancel out: <span class="tm">Messi</span>'s PSG \u2014 two straight UCL R16 exits (missed penalty vs Real) / <span class="tr">Ronaldo</span>'s Utd II \u2014 6th place, no trophy, contract terminated`,
+   `Third data point: <b>with both Messi and Mbapp\u00E9 gone, PSG won back-to-back UCLs (24-25 final 5-0, 25-26)</b>`,
+   `Destination weight class (symmetric audit): Real and Juve were each league's top-class club at the time (Juve on 7 straight Serie A titles when he joined) \u00B7 <span class="tr">Ronaldo</span>'s three Juve UCL campaigns: out at the QF (Ajax), R16 (Lyon), R16 (Porto)`
+  ],
+  mLogic:"If you chose depth: keeping one club at the summit for two decades means beating every new challenger and tactical wave, rewriting every club record \u2014 and carrying the team to a top-scorer title and a cup in the year its finances collapsed refutes the 'good team' frame.",
+  mCrack:"Crack \u2014 in the single sample where he changed environments (PSG), top-stage reproduction failed; the age defense only cancels against Utd II, reaching a draw, not a win.",
+  rLogic:"If you chose range: this is reproducibility. Titles and top-scorer crowns reproduced across three leagues with different defensive cultures \u2014 each time from the first season. Only when results reproduce across environments is the 'environment did it' hypothesis rejected.",
+  rCrack:"Crack \u2014 read the 'anywhere' sample precisely: the league changed three times, the team's weight class never did (Utd, Real, Juve \u2014 each league's richest tier). In the one sample where the class finally dropped (Utd II), the result was 6th place, no trophy, a terminated contract \u2014 the measured range of 'reproduction beyond environment' is movement between elite environments. The depth side, meanwhile, holds a genuine adversity sample: the 20-21 financial collapse \u2014 league top scorer and a cup."},
+ {name:"Results vs Context",
+  idt:"What this axis really was \u2014 <b>read only the final trophy ledger, or adjust for the starting line (a nation with nothing vs a powerhouse)?</b> The methodology axis.",
+  data:[
+   `The ledger: <span class="tm">Messi</span> WC1\u00B7Copa2\u00B7UCL4\u00B7League12\u00B7Ballon8 / <span class="tr">Ronaldo</span> Euro1\u00B7NL2\u00B7UCL5\u00B7League7\u00B7Ballon5`,
+   `Portugal before <span class="tr">Ronaldo</span>: <b>zero majors</b> \u2192 Euro 2016 + two Nations Leagues in his tenure \u2014 <b>all three titles exist only in one player's era</b>`,
+   `Argentina before <span class="tm">Messi</span>: WC \u00D72 + Copa \u00D714, with Higua\u00EDn\u00B7Ag\u00FCero\u00B7Di Mar\u00EDa\u00B7Mascherano beside him`,
+   `Argentina 2014\u201316: <b>three straight major-final defeats</b> (Messi retired briefly) \u2192 then 2021/22/24 three straight titles \u2014 with MVP+top scorer+top assists and every-game POTM all concentrated in one man`,
+   `The market's starting line, measured (pre-tournament title odds): <span class="tr">Portugal</span> \u2014 Euro 2016 ~16/1 (6th-7th pick) \u00B7 WC 2018 25/1-28/1 (8th-9th) \u00B7 WC 2022 12/1-14/1 (7th-9th) / <span class="tm">Argentina</span> \u2014 WC 2014 ~9/2 (2nd) \u00B7 Copa 2021 +275 (2nd) \u00B7 WC 2022 ~5/1 (2nd) \u00B7 Copa 2024 ~+175 (favorite) \u2014 <b>Argentina always a top-two pick; Portugal never higher than ~6th</b>`,
+   `National weight class over time (FIFA rankings, 2005\u20132026): <span class="tm">Argentina</span> ranked above Portugal for ~70% of the era \u2014 typically top-5, ~4.5-5 cumulative years at No. 1 / <span class="tr">Portugal</span> typically 5th-8th, best-ever 3rd \u00B7 though Portugal sat above in five stretches (longest 2017\u20132021, ~4 years; incl. right before the 2010 & 2014 World Cups)`,
+   `<span class="tr">Ronaldo</span>'s Euro 2016 personal composition (symmetric audit): 3 goals 3 assists \u2014 but the knockout share is one R16 assist + one SF goal & assist, and he was off injured at 25' in the final \u00B7 the title path: three group draws, one win inside 90 minutes`
+  ],
+  mLogic:"If you chose results: conditions were unequal for everyone; history remembers only the ledger of those who broke through. And the 'stacked team' rebuttal has a counterexample \u2014 that very lineup lost three straight finals; when the wins finally came, every key metric belonged to one man.",
+  mCrack:"Crack \u2014 a two-time World Cup winner as a starting line, the 2022 draw, and elite teammates remain adjustment items no narrative erases.",
+  rLogic:"If you chose context: a first title for a nation with nothing and one more for a powerhouse are not the same '1'. Three titles existing only within one player's tenure, for a country with a century of zero, is the strongest natural experiment \u2014 and the market's own pre-tournament odds point the same way: winning as an outsider is a steeper climb than winning as the favorite.",
+  rCrack:"Crack \u2014 read the natural experiment's control group to the end and it wobbles. The composition of Portugal's three majors: two are the newly invented Nations League, one a Euro won via a single 90-minute win (with a 25th-minute injury exit in the final). Run the same time-series logic the other way \u2014 Argentina's three titles after 28 years of nothing also exist only in one player's final four years, and they are two Copas and a World Cup, not new inventions. 'Titles that exist only in one player's era' is a structure both sides own."},
+ {name:"Records vs Eyes",
+  idt:"What this axis really was \u2014 <b>trust only measured records, or admit expert judgment (Ballon d'Or, Golden Ball) as evidence?</b> The evidence axis. Admit the votes and Messi's 8-5 leads; strike them and what remains is Ronaldo's set of cumulative goal records \u2014 what you accept as evidence IS the verdict.",
+  data:[
+   `Ballon d'Or <span class="tm">Messi 8</span> vs <span class="tr">Ronaldo 5</span> \u00B7 WC Golden Ball <span class="tm">Messi \u00D72 (only ever)</span>`,
+   `But expert votes split by jury: UEFA Player of the Year (European-stage jury, 2011\u20132023) <span class="tr">Ronaldo 3</span> vs <span class="tm">Messi 2</span> \u2014 and the only back-to-back winner is Ronaldo`,
+   `<b>2010</b>: in a World Cup year, the award skipped Iniesta (who scored the winning final goal) and Xavi \u2014 for a player who exited the QF scoreless`,
+   `<b>2013</b>: treble-winner Rib\u00E9ry passed over \u00B7 <b>2022 Golden Ball</b>: chosen over Mbapp\u00E9 (final hat-trick, 8 tournament goals)`,
+   `Cases where votes and records agreed: <span class="tm">Messi</span> Copa 2021 \u2014 title+MVP+top scorer+top assists (only ever) \u00B7 WC 2022 \u2014 scored + POTM in every knockout game (only ever)`,
+   `A pure-records balance sheet (symmetric audit): goals/game (club 0.83 vs 0.76), career assists (~418 vs ~261), contributions/game (1.15 vs 0.93) favor <span class="tm">Messi</span> / total goals (~976 vs ~919), headed goals (157 vs 31), penalty goals (184 vs 115) favor <span class="tr">Ronaldo</span>`
+  ],
+  mLogic:"If you chose the eyes: football has dominance the stat sheet never records \u2014 press resistance, gravity that drags two defenders, line-breaking passes \u2014 and the only instrument that measured it is more than twenty years of experts who watched. Independent bodies converged on the same direction (8:5, two Golden Balls), and in 2021 and 2022 the votes matched the records exactly.",
+  mCrack:"Crack \u2014 2010 is proof the instrument bends to fame and narrative, and the pattern repeated in 2013 and the 2022 Golden Ball. An instrument with recurring systematic error deserves a narrow confidence interval.",
+  rLogic:"If you chose the records: only what anyone can re-count is falsifiable evidence \u2014 and the voting body itself proved the contamination in 2010. By that standard, what Ronaldo wins is concrete: the all-time records in football's final currency (most career, international, UCL and Euro goals), the UEFA-official UCL assist lead, six straight scoring World Cups \u2014 the majority of the re-countable 'all-time #1' plaques. And even the 'expert eye' does not point one way: the UEFA Player of the Year reads Ronaldo 3 to Messi's 2 \u2014 the verdict of the eyes depends on where the jury sits.",
+  rCrack:"Crack \u2014 'only records count' cuts this camp's own list too. Its favorite exhibits \u2014 three straight knockout MOMs, five Ballons d'Or \u2014 are all juries and votes. And even with every vote stripped out, the world of records is not one world \u2014 totals (career goals, headers, penalties) belong to Ronaldo, but rates belong to Messi (0.83 vs 0.76 goals per game, 1.15 vs 0.93 contributions, ~418 vs ~261 assists). 'Most of the records are Ronaldo's' holds only when you count by totals \u2014 and choosing the counting method is precisely the editing this site admits to in its limitations."}
+];
+const EN_UI={
+ i_eyebrow:"True GOAT \u00B7 Psychometric Fact Check",
+ i_heroH:'They are football\u2019s treasures \u2014 <span class="hl">and both are GOATs.</span>',
+ i_heroLead:'<p>Believing someone is the GOAT out of <b>aesthetic taste</b> — for C.Ronaldo’s game or for Messi’s — is completely legitimate. That is <span class="g">your GOAT</span>.</p><p style="margin-top:12px">The problem: too many people state <b>emotion as if it were fact</b>. These careers span more than twenty years \u2014 there is more you don\u2019t know than you think.</p><p style="margin-top:12px">So we built this with survey science (bipolar items, counterbalanced poles, randomized order). Everyday judgments \u2014 nothing about football \u2014 measure your values, and we show whether your belief is <span class="g">taste (conviction)</span> or <span class="g">contaminated by propaganda</span>, using the hard career record. At the end, everyone\u2019s results reveal the <b>TRUE GOAT</b>.</p>',
+ i_cta:'Start <span>\u2192</span>',
+ i_hint:"1 heart vote \u00B7 9 blind items \u00B7 full fact reveal",
+ i_voteStep:"Step 1 / 3 \u00B7 Heart vote",
+ i_voteH:"Right now, from the heart \u2014<br>who is your GOAT?",
+ i_voteFoot:"Either answer is respected \u2014 they are both GOATs.",
+ i_demoStep:"Step 2 / 3 \u00B7 Sample info (optional)",
+ i_demoH:"Just two quick questions.",
+ i_demoP:"Never used in your verdict \u2014 only for transparent sample reporting. Feel free to skip.",
+ dAge:'<option value="">Age group (skip)</option><option value="10s">Teens</option><option value="20s">20s</option><option value="30s">30s</option><option value="40s">40s+</option>',
+ dWatch:'<option value="">How often do you watch football? (skip)</option><option value="weekly">Almost every week</option><option value="sometimes">Sometimes</option><option value="rarely">Rarely</option>',
+ i_demoGo:"Continue \u2192",
+ i_skip:"Skip",
+ i_backVote:"\u2190 Back (edit heart vote)",
+ i_quizStep:"Step 3 / 3 \u00B7 Taste test (nothing about football)",
+ i_quizP:"For each item, tell us how close your heart is to either side, A\u2013E. There are no right answers.",
+ i_pn:'Page <b id="pnum">1</b> / 3',
+ i_finalTag:"Final \u00B7 Verdict",
+ i_finalH:'Your heart and your values<br><span class="hl">each picked a GOAT.</span>',
+ i_sec1:"\u2460 Heart vote \u2014 the GOAT your emotion picked",
+ i_sec2:"\u2461 Fact verdict \u2014 the GOAT your 8 value items point to",
+ i_sec3:"\u2462 Your value profile \u2014 8 axes",
+ i_sec4:"\u2463 What the 8 axes really were \u2014 full fact reveal",
+ i_sec5:"\u2464 Methodology",
+ i_sec6:"\u2465 Honest limitations",
+ i_pl1:"Your heart pick",
+ i_ps1:"Chosen before the test \u2014 no calculation.",
+ i_pl2:"Everyone\u2019s heart picks",
+ i_pl3:"Score-based verdict (total \u221216 ~ +16)",
+ i_pl4:"Everyone\u2019s fact verdicts",
+ i_bal0:"Balance 0",
+ i_profP:"Each axis was measured by one bipolar item. Bar left = on that axis your values sided with the Messi camp; right = the Ronaldo camp.",
+ i_axP:"The everyday questions you answered were in fact the 8 core axes of the 20-plus-year GOAT debate. For each axis \u2014 your item and answer, the raw data both camps fight over, and each camp\u2019s logic with its cracks. Nothing hidden.",
+ i_dispute:"\u2691 Dispute the data \u2014 report errors or omissions",
+ i_methodH:"Design principles behind this test",
+ i_methodP:'<b>Bipolar items</b> \u2014 no agree/disagree at all: two equally attractive options, answered on a 5-point closeness scale, which eliminates acquiescence bias at the root and framing bias by always showing both sides. \u00B7 <b>First-person taste vignettes</b> \u2014 you judge your own preferences, not other people\u2019s greatness, concealing what is measured. \u00B7 <b>8 axes \u00D7 1 item, poles counterbalanced 4:4</b> \u2014 the Messi-camp pole appears on the left in half the items to control position bias, and the result screen\u2019s left/right layout (name order, tally bars, gauge direction) is likewise randomized per visitor. \u00B7 <b>Randomized item order.</b> \u00B7 <b>Attention check + straight-lining detection</b>, surfaced as a reliability badge. \u00B7 <b>Sources & verification</b> \u2014 official competition stats and major press (as of July 2026); accepted disputes get a public changelog.',
+ i_limH:"Honestly disclosed: the structural limits",
+ i_limP:'<b>1. The item\u2192camp mapping is the author\u2019s analytical judgment.</b> E.g., "results only" is mapped to the Messi camp (trophy-set completeness), but one could map it the other way ("most career goals is also a result"). That is why every axis card publishes both camps\u2019 logic \u2014 if you reject a mapping, flip that axis yourself. \u00B7 <b>2. No statistical validation yet</b> (no pilot, no reliability coefficients); axis-level internal consistency will be published once responses accumulate. \u00B7 <b>3. Equal axis weights are a declared default (principle of indifference), and one-item-per-axis is a completion-rate tradeoff</b> that gives up multi-item error cancellation. \u00B7 <b>4. Curating the data rows involves editing</b> \u2014 hence the dispute channel and public changelog. \u00B7 <b>5. Voting with the heart first may prime later answers</b>; first-person vignettes soften but cannot remove this. \u00B7 <b>6. The tally is a self-selected sample</b> \u2014 not representative of world football fans, which is why sample info is collected and disclosed. \u00B7 Finally \u2014 <b>a mismatch between heart pick and fact verdict is NOT proof of propaganda.</b> It shows an inconsistency between your declared values and your conclusion; whether the cause is taste or misinformation is yours to judge from the data.',
+ i_foot:'This site does not rank the two players. Messi and Ronaldo are both treasures of football, and an aesthetic GOAT of your own is entirely legitimate. The experiment checks one thing \u2014 whether your belief is taste (conviction) or built on inaccurate grounds. Figures are based on public records as of July 2026; some are approximate. Outcomes of competitions not yet confirmed are not covered.',
+ i_restart:"Retake the test",
+ shareBtn:"Share result"
+};
+if(LANG==='en'){
+  for(const k in EN_UI){const e=document.getElementById(k); if(e) e.innerHTML=EN_UI[k];}
+  ITEMS.forEach((it,i)=>Object.assign(it,ITEMS_EN[i]));
+  Object.assign(IMC,IMC_EN);
+  AXMETA.forEach((ax,i)=>Object.assign(ax,AXMETA_EN[i]));
+  document.title="TRUE GOAT \u2014 Is your belief taste, or propaganda?";
+  document.documentElement.lang='en';
+}
+
+/* =========================================================================
+   결과 화면 좌우 배치 무작위화 — 방문자의 50%는 호날두가 왼쪽 (순서 편향 통제)
+   문항 극 위치의 4:4 교차와 같은 원리를 결과 화면의 집계 바·게이지·프로필에 적용.
+   히어로(메시 좌)와 투표 화면(호날두 좌)은 서로 반대로 고정해 교차 배치.
+   방문자별로 한 번 배정되어 localStorage에 고정됩니다(재방문 시 동일).
+   ========================================================================= */
+let FLIP=false;
+try{
+  let f=localStorage.getItem('goat_side');
+  if(f===null){ f=Math.random()<0.5?'1':'0'; localStorage.setItem('goat_side',f); }
+  FLIP=(f==='1');
+}catch(e){}
+(function applyFlip(){
+  if(!FLIP) return;
+  document.body.classList.add('flip');
+  ['h','f'].forEach(p=>{                                // 집계 바 라벨·트랙 순서
+    const lab=document.getElementById(p+'PctM').parentElement;
+    lab.appendChild(lab.children[0]);
+    const trk=document.getElementById(p+'BarM').parentElement;
+    trk.appendChild(trk.children[0]);
+  });
+  const sl=document.querySelector('.smeter .slab2');    // 게이지 양끝 라벨
+  if(sl){ sl.children[0].textContent='◄ RONALDO −16'; sl.children[2].textContent='+16 MESSI ►'; }
+  const z=document.querySelector('.szones');            // 게이지 존 색상
+  if(z){ const b=z.children[0].style.background; z.children[0].style.background=z.children[2].style.background; z.children[2].style.background=b; }
+  const pp=document.getElementById('i_profP');          // 프로필 좌우 설명문
+  if(pp) pp.textContent = LANG==='en'
+    ? 'Each axis was measured by one bipolar item. Bar left = on that axis your values sided with the Ronaldo camp; right = the Messi camp.'
+    : '각 축은 1개의 양극 제시형 문항으로 측정되었습니다. 바가 왼쪽이면 그 축에서 당신의 가치관이 호날두 진영 논리에, 오른쪽이면 메시 진영 논리에 동의했다는 뜻입니다.';
+})();
+
+/* =========================================================================
+   시스템 언어 자동 번역
+   ko / en 이 아닌 시스템 언어면 영어 원문을 자동 번역해 표시합니다.
+   ① 크롬 내장 온디바이스 번역기(Translator API) — 외부 스크립트·네트워크 불필요
+   ② 실패 시 Google 웹사이트 번역기 위젯으로 폴백
+   ③ 둘 다 실패하면 영어 원문 그대로 (기능은 정상 동작)
+   ========================================================================= */
+(function initTranslate(){
+  const sel=document.getElementById('langSel');
+  if(sel) sel.value = (LANG_PREF==='auto') ? 'auto'
+        : ([...sel.options].some(o=>o.value===LANG_PREF) ? LANG_PREF : 'auto');
+  if(!TR_TARGET) return;
+
+  function withTimeout(p,ms){
+    return Promise.race([p,new Promise((_,rj)=>setTimeout(()=>rj(new Error('timeout')),ms))]);
+  }
+  const SKIP=/^(SCRIPT|STYLE|NOSCRIPT|SELECT|OPTION|TEXTAREA)$/;
+  function textNodes(root){
+    const out=[];
+    const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(n){
+      if(!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      for(let p=n.parentElement;p;p=p.parentElement){
+        if(SKIP.test(p.tagName)) return NodeFilter.FILTER_REJECT;
+        if(p.classList && p.classList.contains('notranslate')) return NodeFilter.FILTER_REJECT;
+        if(p.getAttribute && p.getAttribute('translate')==='no') return NodeFilter.FILTER_REJECT;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }});
+    let n; while((n=w.nextNode())) out.push(n);
+    return out;
+  }
+
+  /* ① 크롬 내장 번역기 */
+  async function nativeTranslate(){
+    if(!('Translator' in window)) return false;
+    const av=await withTimeout(Translator.availability({sourceLanguage:LANG,targetLanguage:TR_TARGET}),5000);
+    if(!av || av==='unavailable') return false;
+    const tr=await withTimeout(Translator.create({sourceLanguage:LANG,targetLanguage:TR_TARGET}),30000);
+    const cache=new Map(), done=new WeakSet();
+    async function run(){
+      for(const n of textNodes(document.body)){
+        if(done.has(n)) continue;
+        done.add(n);
+        const s=n.nodeValue.trim();
+        if(cache.has(s)){ n.nodeValue=n.nodeValue.replace(s,cache.get(s)); continue; }
+        try{
+          const t=await tr.translate(s);
+          if(t){ cache.set(s,t); n.nodeValue=n.nodeValue.replace(s,t); }
+        }catch(e){ /* 개별 실패는 원문 유지 */ }
+      }
+    }
+    await run();
+    document.documentElement.lang=TR_TARGET;
+    // 퀴즈·결과 화면은 나중에 렌더링되므로 추가된 노드도 계속 번역
+    let queued=false;
+    new MutationObserver(()=>{
+      if(queued) return; queued=true;
+      setTimeout(()=>{queued=false; run();},150);
+    }).observe(document.body,{childList:true,subtree:true});
+    return true;
+  }
+
+  /* ② Google 웹사이트 번역기 폴백 */
+  function googleTranslate(){
+    try{ document.cookie='googtrans=/'+LANG+'/'+TR_TARGET+';path=/'; }catch(e){}
+    window.googleTranslateElementInit=function(){
+      new google.translate.TranslateElement({pageLanguage:LANG,autoDisplay:false},'google_translate_element');
+      let n=0;
+      const t=setInterval(function(){
+        const combo=document.querySelector('#google_translate_element select.goog-te-combo');
+        if(combo){
+          const opt=[...combo.options].find(o=>o.value===TR_TARGET)
+                 || [...combo.options].find(o=>baseLang(o.value)===baseLang(TR_TARGET));
+          if(opt && combo.value!==opt.value){
+            combo.value=opt.value;
+            combo.dispatchEvent(new Event('change'));
+          }
+          clearInterval(t);
+        }
+        if(++n>60) clearInterval(t);   // 약 9초 후 포기 → 영어 원문 그대로
+      },150);
+    };
+    const s=document.createElement('script');
+    s.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    s.async=true;
+    s.onerror=function(){/* 오프라인 등 — 원문 유지 */};
+    document.head.appendChild(s);
+  }
+
+  nativeTranslate().then(ok=>{ if(!ok) googleTranslate(); }).catch(()=>googleTranslate());
+})();
+
+
+</script>
+</body>
+</html>
