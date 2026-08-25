@@ -1,0 +1,69 @@
+name: Publish Japanese-Korean Subtitle APK
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-jpko-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout public repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download APK parts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .apk-parts dist
+          base='https://pfyzskmcvspvjtlhugwd.supabase.co/storage/v1/object/public/jpko-apk/Japanese-Korean-Live-Subtitle.apk.part-'
+          curl --fail --location --retry 5 --retry-delay 2 --output .apk-parts/part-000 "${base}000"
+          curl --fail --location --retry 5 --retry-delay 2 --output .apk-parts/part-001 "${base}001"
+          curl --fail --location --retry 5 --retry-delay 2 --output .apk-parts/part-002 "${base}002"
+          test "$(wc -c < .apk-parts/part-000)" = '40000000'
+          test "$(wc -c < .apk-parts/part-001)" = '40000000'
+          test "$(wc -c < .apk-parts/part-002)" = '530862'
+
+      - name: Reconstruct and verify APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .apk-parts/part-000 .apk-parts/part-001 .apk-parts/part-002 > dist/Japanese-Korean-Live-Subtitle.apk
+          test "$(wc -c < dist/Japanese-Korean-Live-Subtitle.apk)" = '80530862'
+          echo '65c9aa3ca3854b49414ff46ac32997e1d8d7b5f117a07821164e19db8233084a  dist/Japanese-Korean-Live-Subtitle.apk' | sha256sum --check --strict
+          echo '65c9aa3ca3854b49414ff46ac32997e1d8d7b5f117a07821164e19db8233084a  Japanese-Korean-Live-Subtitle.apk' > dist/SHA256SUMS.txt
+          unzip -t dist/Japanese-Korean-Live-Subtitle.apk >/dev/null
+
+      - name: Commit verified APK to public repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add dist/Japanese-Korean-Live-Subtitle.apk dist/SHA256SUMS.txt
+          if git diff --cached --quiet; then
+            echo 'APK already published.'
+          else
+            git commit -m 'Publish verified Japanese-Korean subtitle APK'
+            git push origin HEAD:main
+          fi
+
+      - name: Upload APK artifact
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
+        with:
+          name: Japanese-Korean-Live-Subtitle-APK
+          path: |
+            dist/Japanese-Korean-Live-Subtitle.apk
+            dist/SHA256SUMS.txt
+          retention-days: 1
+          if-no-files-found: error
