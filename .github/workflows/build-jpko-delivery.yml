@@ -1,0 +1,87 @@
+name: Build temporary JP-KO subtitle APK
+
+on:
+  push:
+    branches:
+      - jpko-apk-delivery-20260825
+    paths:
+      - '.github/workflows/build-jpko-delivery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout delivery branch
+        uses: actions/checkout@v4
+
+      - name: Fetch verified source chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/jpko-source-chunks
+          curl --fail --location --silent --show-error --retry 3 'https://raw.githubusercontent.com/artubeditor/youtube/jpko-live-subtitle-v1/jpko-source-chunks/part-000?token=B7CMA3GIC63K52UUMJY3M2LKRWF6VAA' -o /tmp/jpko-source-chunks/part-000
+          curl --fail --location --silent --show-error --retry 3 'https://raw.githubusercontent.com/artubeditor/youtube/jpko-live-subtitle-v1/jpko-source-chunks/part-001?token=B7CMA3AHATJCSMUMMUFJEGLKRWF6VAA' -o /tmp/jpko-source-chunks/part-001
+          curl --fail --location --silent --show-error --retry 3 'https://raw.githubusercontent.com/artubeditor/youtube/jpko-live-subtitle-v1/jpko-source-chunks/part-002?token=B7CMA3C5YBMOK52ADSLVOXDKRWF6VAA' -o /tmp/jpko-source-chunks/part-002
+          curl --fail --location --silent --show-error --retry 3 'https://raw.githubusercontent.com/artubeditor/youtube/jpko-live-subtitle-v1/jpko-source-chunks/part-003?token=B7CMA3H657M7TFJX56M3BXLKRWF6VAA' -o /tmp/jpko-source-chunks/part-003
+          curl --fail --location --silent --show-error --retry 3 'https://raw.githubusercontent.com/artubeditor/youtube/jpko-live-subtitle-v1/jpko-source-chunks/part-004?token=B7CMA3H33RTFW2GBY7MG4ZDKRWF6VAA' -o /tmp/jpko-source-chunks/part-004
+          curl --fail --location --silent --show-error --retry 3 'https://raw.githubusercontent.com/artubeditor/youtube/jpko-live-subtitle-v1/jpko-source-chunks/part-005?token=B7CMA3DF4CACHMSWH2MHJCTKRWF6VAA' -o /tmp/jpko-source-chunks/part-005
+          curl --fail --location --silent --show-error --retry 3 'https://raw.githubusercontent.com/artubeditor/youtube/jpko-live-subtitle-v1/jpko-source-chunks/part-006?token=B7CMA3FT4RAMKP3ZC6R5KRTKRWF6VAA' -o /tmp/jpko-source-chunks/part-006
+          curl --fail --location --silent --show-error --retry 3 'https://raw.githubusercontent.com/artubeditor/youtube/jpko-live-subtitle-v1/jpko-source-chunks/part-007?token=B7CMA3G6XD5KKEPMNAUBN7DKRWF6VAA' -o /tmp/jpko-source-chunks/part-007
+          curl --fail --location --silent --show-error --retry 3 'https://raw.githubusercontent.com/artubeditor/youtube/jpko-live-subtitle-v1/jpko-source-chunks/part-008?token=B7CMA3CM76GPP2DBT7WOM6DKRWF6VAA' -o /tmp/jpko-source-chunks/part-008
+          wc -c /tmp/jpko-source-chunks/part-*
+          cat /tmp/jpko-source-chunks/part-* | base64 --decode > /tmp/jpko-live-subtitle-source.zip
+          echo 'b03296325900958356b394460fe2efe56ae324b580f321d5b151cad6c07cfb8e  /tmp/jpko-live-subtitle-source.zip' | sha256sum -c -
+          unzip -t /tmp/jpko-live-subtitle-source.zip
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK 35
+        shell: bash
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager 'platform-tools' 'platforms;android-35' 'build-tools;35.0.0'
+
+      - name: Set up Gradle 8.9
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Extract project
+        shell: bash
+        run: |
+          rm -rf /tmp/jpko-build
+          mkdir -p /tmp/jpko-build
+          unzip -q /tmp/jpko-live-subtitle-source.zip -d /tmp/jpko-build
+          test -f /tmp/jpko-build/jpko-live-subtitle/app/build.gradle
+
+      - name: Run tests and build APK
+        working-directory: /tmp/jpko-build/jpko-live-subtitle
+        shell: bash
+        run: gradle --no-daemon --console=plain testDebugUnitTest assembleDebug --stacktrace
+
+      - name: Verify and publish APK to delivery branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cp /tmp/jpko-build/jpko-live-subtitle/app/build/outputs/apk/debug/app-debug.apk dist/Japanese-Korean-Live-Subtitle.apk
+          sha256sum dist/Japanese-Korean-Live-Subtitle.apk | tee dist/SHA256SUMS.txt
+          test "$(stat -c%s dist/Japanese-Korean-Live-Subtitle.apk)" -gt 70000000
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add dist/Japanese-Korean-Live-Subtitle.apk dist/SHA256SUMS.txt
+          git commit -m 'Publish installable JP-KO live subtitle APK'
+          git push origin HEAD:jpko-apk-delivery-20260825
