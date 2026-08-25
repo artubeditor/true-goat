@@ -1,0 +1,38 @@
+name: Verify Japanese-Korean Subtitle APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-jpko-apk.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout APK
+        uses: actions/checkout@v4
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install build tools
+        shell: bash
+        run: sdkmanager 'build-tools;35.0.0'
+
+      - name: Verify exact file, APK signature and package metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk='dist/Japanese-Korean-Live-Subtitle.apk'
+          test "$(stat -c%s "$apk")" -eq 80530862
+          echo '65c9aa3ca3854b49414ff46ac32997e1d8d7b5f117a07821164e19db8233084a  dist/Japanese-Korean-Live-Subtitle.apk' | sha256sum -c -
+          unzip -t "$apk" >/dev/null
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$apk"
+          "$ANDROID_HOME/build-tools/35.0.0/aapt" dump badging "$apk"
