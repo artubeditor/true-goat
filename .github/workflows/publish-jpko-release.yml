@@ -1,0 +1,78 @@
+name: Publish verified JP-KO subtitle APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/publish-jpko-release.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download APK parts and reconstruct
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://pfyzskmcvspvjtlhugwd.supabase.co/storage/v1/object/public/jpko-apk/Japanese-Korean-Live-Subtitle.apk.part'
+          for part in 000 001 002; do
+            curl --fail --silent --show-error --location --retry 5 --retry-all-errors --max-time 900 \
+              "$base-$part" --output "/tmp/part-$part"
+          done
+          cat /tmp/part-000 /tmp/part-001 /tmp/part-002 \
+            > /tmp/Japanese-Korean-Live-Subtitle-Capedia-v1-debug.apk
+
+      - name: Verify exact APK bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          apk='/tmp/Japanese-Korean-Live-Subtitle-Capedia-v1-debug.apk'
+          test "$(stat -c%s "$apk")" -eq 80530862
+          echo '65c9aa3ca3854b49414ff46ac32997e1d8d7b5f117a07821164e19db8233084a  /tmp/Japanese-Korean-Live-Subtitle-Capedia-v1-debug.apk' \
+            | sha256sum -c -
+          unzip -t "$apk" >/dev/null
+          keytool -printcert -jarfile "$apk" >/tmp/apk-certificate.txt
+
+      - name: Publish public GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag='jpko-subtitle-v1.0.0'
+          apk='/tmp/Japanese-Korean-Live-Subtitle-Capedia-v1-debug.apk'
+          gh release delete "$tag" --cleanup-tag --yes 2>/dev/null || true
+          gh release create "$tag" "$apk" \
+            --title 'Japanese → Korean Live Subtitle v1.0.0' \
+            --notes 'Galaxy/Android 10+ debug build. Captures playback audio when allowed, recognizes Japanese on-device with Whisper, translates Japanese to Korean with the offline ML Kit model, and displays Korean overlay subtitles. SHA-256: 65c9aa3ca3854b49414ff46ac32997e1d8d7b5f117a07821164e19db8233084a'
+
+      - name: Verify release asset metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release view jpko-subtitle-v1.0.0 --json url,assets \
+            | tee /tmp/release.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('/tmp/release.json').read_text())
+          assets = data.get('assets') or []
+          assert len(assets) == 1, assets
+          asset = assets[0]
+          assert asset['name'] == 'Japanese-Korean-Live-Subtitle-Capedia-v1-debug.apk', asset
+          assert asset['size'] == 80530862, asset
+          print(data['url'])
+          print(asset['url'])
+          PY
