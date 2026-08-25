@@ -1,0 +1,96 @@
+name: Build JP-KO Live Subtitle APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - jpko-live-subtitle-download
+    paths:
+      - 'jpko-source-chunks/**'
+      - '.github/workflows/build-jpko-apk.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Reconstruct and verify source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat jpko-source-chunks/part-* | base64 --decode > jpko-live-subtitle-source.zip
+          echo 'b03296325900958356b394460fe2efe56ae324b580f321d5b151cad6c07cfb8e  jpko-live-subtitle-source.zip' | sha256sum --check
+          unzip -t jpko-live-subtitle-source.zip
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK 35
+        shell: bash
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager 'platform-tools' 'platforms;android-35' 'build-tools;35.0.0'
+
+      - name: Set up Gradle 8.9
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Extract project
+        shell: bash
+        run: |
+          rm -rf .build
+          mkdir -p .build
+          unzip -q jpko-live-subtitle-source.zip -d .build
+          test -f .build/jpko-live-subtitle/app/build.gradle
+
+      - name: Test and build debug APK
+        working-directory: .build/jpko-live-subtitle
+        shell: bash
+        run: gradle --no-daemon --console=plain testDebugUnitTest assembleDebug --stacktrace
+
+      - name: Verify and prepare APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist artifact
+          cp .build/jpko-live-subtitle/app/build/outputs/apk/debug/app-debug.apk dist/Japanese-Korean-Live-Subtitle.apk
+          unzip -t dist/Japanese-Korean-Live-Subtitle.apk
+          sha256sum dist/Japanese-Korean-Live-Subtitle.apk | tee dist/SHA256SUMS.txt
+          cp dist/Japanese-Korean-Live-Subtitle.apk artifact/Japanese-Korean-Live-Subtitle.apk
+          cp dist/SHA256SUMS.txt artifact/SHA256SUMS.txt
+          cp .build/jpko-live-subtitle/README.md artifact/README.txt
+
+      - name: Upload installable APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Japanese-Korean-Live-Subtitle-APK
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish APK on branch
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f dist/Japanese-Korean-Live-Subtitle.apk dist/SHA256SUMS.txt
+          if git diff --cached --quiet; then
+            echo 'APK is already current.'
+          else
+            git commit -m 'Publish JP-KO live subtitle APK'
+            git push origin HEAD:jpko-live-subtitle-download
+          fi
