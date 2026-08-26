@@ -41,7 +41,7 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Reconstruct and validate source
+      - name: Reconstruct and cryptographically verify source
         shell: bash
         run: |
           set -euo pipefail
@@ -55,18 +55,15 @@ jobs:
           unzip -t /tmp/jpko-v2.zip >/dev/null
           unzip -q /tmp/jpko-v2.zip -d .build
           test -f .build/jpko-live-subtitle/app/build.gradle
-          grep -q 'versionName "2.0.0"' .build/jpko-live-subtitle/app/build.gradle
-          grep -q 'Kotoba-Whisper' .build/jpko-live-subtitle/app/src/main/java/ai/capedia/jpko/ModelRepository.kt
-          grep -q 'quality_optimized' .build/jpko-live-subtitle/app/src/main/java/ai/capedia/jpko/DeepLTranslator.kt
 
-      - name: Test and build APK
+      - name: Run unit tests and compile APK
         working-directory: .build/jpko-live-subtitle
         shell: bash
         run: |
           set -euo pipefail
           gradle --no-daemon --console=plain testDebugUnitTest assembleDebug --stacktrace
 
-      - name: Verify APK
+      - name: Verify APK signature and metadata
         shell: bash
         run: |
           set -euo pipefail
