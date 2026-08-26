@@ -55,6 +55,7 @@ jobs:
           unzip -t /tmp/jpko-v2.zip >/dev/null
           unzip -q /tmp/jpko-v2.zip -d .build
           test -f .build/jpko-live-subtitle/app/build.gradle
+          rm -f .build/jpko-live-subtitle/app/src/main/java/ai/capedia/jpko/TaskAwait.kt
 
       - name: Run unit tests and compile APK
         working-directory: .build/jpko-live-subtitle
