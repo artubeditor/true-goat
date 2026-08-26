@@ -6,7 +6,7 @@ on:
     branches:
       - jpko-kotoba-deepl-v2
     paths:
-      - 'jpko-kotoba-deepl-v2-source.zip'
+      - 'jpko-v2-source-b64/**'
       - '.github/workflows/build-jpko-kotoba-deepl-v2.yml'
 
 permissions:
@@ -41,15 +41,19 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Unpack and validate source
+      - name: Reconstruct and validate source
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf .build
+          rm -rf .build /tmp/jpko-v2.*
           mkdir -p .build
-          echo "Uploaded source SHA-256: $(sha256sum jpko-kotoba-deepl-v2-source.zip | cut -d' ' -f1)"
-          unzip -t jpko-kotoba-deepl-v2-source.zip >/dev/null
-          unzip -q jpko-kotoba-deepl-v2-source.zip -d .build
+          test "$(find jpko-v2-source-b64 -type f -name 'part-*' | wc -l)" -eq 11
+          cat jpko-v2-source-b64/part-* > /tmp/jpko-v2.b64
+          test "$(wc -c < /tmp/jpko-v2.b64)" -eq 40216
+          base64 --decode /tmp/jpko-v2.b64 > /tmp/jpko-v2.zip
+          echo '0d08584bf5fab1ff80e1a0dc22cdcc4c9f2ce660c55e9cc3cec1e61ec11bf8b5  /tmp/jpko-v2.zip' | sha256sum -c -
+          unzip -t /tmp/jpko-v2.zip >/dev/null
+          unzip -q /tmp/jpko-v2.zip -d .build
           test -f .build/jpko-live-subtitle/app/build.gradle
           grep -q 'versionName "2.0.0"' .build/jpko-live-subtitle/app/build.gradle
           grep -q 'Kotoba-Whisper' .build/jpko-live-subtitle/app/src/main/java/ai/capedia/jpko/ModelRepository.kt
@@ -100,4 +104,4 @@ jobs:
             dist/Japanese-Korean-Live-Subtitle-Kotoba-DeepL-v2-debug.apk \
             dist/SHA256SUMS.txt \
             --title 'Japanese → Korean Live Subtitle — Kotoba + DeepL v2.0.0' \
-            --notes "Kotoba-Whisper v2.0 Q5 Japanese ASR + DeepL quality_optimized Korean translation. Previous 4 Japanese subtitle lines are sent as DeepL context. DeepL API key is entered by the user and encrypted with Android Keystore for this personal debug build. SHA-256: $HASH"
+            --notes "Kotoba-Whisper v2.0 Q5 Japanese ASR + DeepL quality_optimized Korean translation with previous Japanese dialogue context. SHA-256: $HASH"
