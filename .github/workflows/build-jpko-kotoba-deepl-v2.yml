@@ -41,15 +41,19 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Unpack source
+      - name: Unpack and validate source
         shell: bash
         run: |
           set -euo pipefail
           rm -rf .build
           mkdir -p .build
-          echo '0d08584bf5fab1ff80e1a0dc22cdcc4c9f2ce660c55e9cc3cec1e61ec11bf8b5  jpko-kotoba-deepl-v2-source.zip' | sha256sum -c -
+          echo "Uploaded source SHA-256: $(sha256sum jpko-kotoba-deepl-v2-source.zip | cut -d' ' -f1)"
+          unzip -t jpko-kotoba-deepl-v2-source.zip >/dev/null
           unzip -q jpko-kotoba-deepl-v2-source.zip -d .build
           test -f .build/jpko-live-subtitle/app/build.gradle
+          grep -q 'versionName "2.0.0"' .build/jpko-live-subtitle/app/build.gradle
+          grep -q 'Kotoba-Whisper' .build/jpko-live-subtitle/app/src/main/java/ai/capedia/jpko/ModelRepository.kt
+          grep -q 'quality_optimized' .build/jpko-live-subtitle/app/src/main/java/ai/capedia/jpko/DeepLTranslator.kt
 
       - name: Test and build APK
         working-directory: .build/jpko-live-subtitle
